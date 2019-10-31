@@ -17,6 +17,7 @@
     <modules>
         <module>async-demo</module>
         <module>common</module>
+        <module>spring-boot-autoconfiguration-demo</module>
     </modules>
 
 
