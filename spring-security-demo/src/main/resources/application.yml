@@ -11,9 +11,16 @@ spring:
     mode: HTML
     prefix: classpath:/templates/
     suffix: .html
+    servlet:
+      content-type: text/html
     # excluded-view-names:
     # template-resolver-order:
     # view-names:
+  datasource:
+    driver-class-name:
+    url:
+    username:
+    password:
 
 logging:
   level:
