@@ -20,6 +20,7 @@
         <module>spring-boot-autoconfiguration-demo</module>
         <module>spring-security-demo</module>
         <module>stream-demo</module>
+        <module>rabbitmq-demo</module>
     </modules>
 
 
