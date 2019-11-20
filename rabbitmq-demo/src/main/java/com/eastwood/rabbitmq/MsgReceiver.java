@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 
@@ -19,13 +21,40 @@ import java.io.IOException;
 @Component
 public class MsgReceiver {
 
+    private final RedisTemplate<String, String> redisTemplate;
+
+    public MsgReceiver(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+
     @RabbitListener(queues = "QUEUE_A")
     @RabbitHandler
     public void messageHanlder(Message message, Channel channel) throws IOException {
 //        int i=10/0;
         log.info("message received [" + new String(message.getBody()) + "]");
-        //手动ack
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
+        String messageId = message.getMessageProperties().getMessageId();
+        if (!StringUtils.isEmpty(messageId)) {
+            try{
+                //利用redis 单线程和setnx命令 保证消息幂等性
+                if(redisTemplate.opsForValue().setIfAbsent(messageId, "1")) {
+                    //business code, process message
+                    log.info("process message .....");
+                } else {
+                    //do nothing
+                    log.info("i do nothing");
+                }
+                int i=10/0;
+                //手动ack
+                channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
+            }catch (Exception e) {
+                redisTemplate.delete(messageId);
+                log.error(e.getMessage());
+            }
+        } else {
+            log.error("消息中不包含messageId，已过滤");
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
+        }
 
 
         // 1.negatively acknowledge, the message will

@@ -19,4 +19,9 @@ public class TestController {
     public void test() {
         msgProducer.sendMsg("hihihihihihihihih");
     }
+
+    @GetMapping("/test2")
+    public void test2() {
+        msgProducer.sendMsg2("msssssssssssss");
+    }
 }

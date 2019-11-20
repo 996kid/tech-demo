@@ -11,7 +11,17 @@ spring:
 #    #开启发送失败退回
 #    publisher-returns: true
     listener:
-      direct:
-        acknowledge-mode: manual
+#      direct:
+#        acknowledge-mode: manual
+#        在每个消费者端能达到的最大的未确认的消息 设置为1：每次拉取一条
+#        prefetch: 1
       simple:
         acknowledge-mode: manual
+        prefetch: 1
+        retry:
+          #消费者因为业务异常未能正确处理消息，默认会一直重试，这里关闭重试机制
+          enabled: false
+
+  redis:
+    host: localhost
+    port: 6379
