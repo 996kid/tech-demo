@@ -26,4 +26,9 @@ public class AsyncService {
         }
         return new AsyncResult("result from async thread");
     }
+
+    @Async("asyncThreadPoolTaskExecutor")
+    public void helloWorld() {
+        System.out.println("hello-world");
+    }
 }

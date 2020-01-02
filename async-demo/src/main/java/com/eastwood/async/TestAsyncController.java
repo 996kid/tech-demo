@@ -15,10 +15,10 @@ import java.util.concurrent.Future;
  */
 @RestController
 @Slf4j
-public class TestAsyncController {
+public class TestAsyncController extends BaseController{
 
-    @Autowired
-    private AsyncService asyncService;
+//    @Autowired
+//    private AsyncService asyncService;
 
     @GetMapping("/async")
     public void async() {
@@ -34,5 +34,10 @@ public class TestAsyncController {
         }
         long end = System.currentTimeMillis();
         log.info("总耗时： {}ms", end - start);
+    }
+
+    @GetMapping("/test")
+    public void testExtendsField() {
+        asyncService.helloWorld();
     }
 }
