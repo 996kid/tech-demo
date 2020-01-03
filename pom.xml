@@ -22,6 +22,7 @@
         <module>stream-demo</module>
         <module>rabbitmq-demo</module>
         <module>mybatis-transaction-demo</module>
+        <module>guice-demo</module>
     </modules>
 
 
