@@ -23,6 +23,7 @@
         <module>rabbitmq-demo</module>
         <module>mybatis-transaction-demo</module>
         <module>guice-demo</module>
+        <module>oauth2-demo</module>
     </modules>
 
 
