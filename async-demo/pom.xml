@@ -11,7 +11,8 @@
 
     <artifactId>async-demo</artifactId>
     <properties>
-        <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
+        <dockerfile-maven-version>1.4.12</dockerfile-maven-version>
+        <docker-repository>996kid.com</docker-repository>
     </properties>
 
     <dependencies>
@@ -28,8 +29,18 @@
         </dependency>
     </dependencies>
 
-    <!--<build>
+
+    <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.eastwood.async.AsyncApplication</mainClass>
+                    <finalName>${project.name}</finalName>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
@@ -44,13 +55,16 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>spotify/foobar</repository>
+                    <username>996kid</username>
+                    <password>Yy31415926</password>
+                    <repository>${docker-repository}/lets-roll/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
+                    <!--<useMavenSettingsForAuth>true</useMavenSettingsForAuth>-->
                     <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 </project>

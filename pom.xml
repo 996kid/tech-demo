@@ -26,5 +26,20 @@
         <module>oauth2-demo</module>
     </modules>
 
+    <distributionManagement>
+        <repository>
+            <id>kid-repository-release</id>
+            <url>
+                http://106.13.126.196:8081/repository/maven-releases/
+            </url>
+        </repository>
+        <snapshotRepository>
+            <id>kid-repository-snapshots</id>
+            <url>
+                http://106.13.126.196:8081/repository/maven-snapshots/
+            </url>
+        </snapshotRepository>
+    </distributionManagement>
+
 
 </project>
