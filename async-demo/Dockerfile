@@ -8,4 +8,4 @@ ENTRYPOINT ["/usr/bin/java", "-jar", "/usr/share/myservice/async-demo.jar"]
 # Add the service itself
 #ARG JAR_FILE
 
-ADD target/${JAR_FILE} /usr/share/myservice/async-demo.jar
+ADD ${JAR_FILE} /usr/share/myservice/async-demo.jar
