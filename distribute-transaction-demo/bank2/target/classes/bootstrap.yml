@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: bank2
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.13.126.196:8848

@@ -41,7 +41,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>${dockerfile-maven-version}</version>
@@ -59,12 +59,12 @@
                     <password>Yy31415926</password>
                     <repository>${docker-repository}/lets-roll/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
-                    <!--<useMavenSettingsForAuth>true</useMavenSettingsForAuth>-->
+                    &lt;!&ndash;<useMavenSettingsForAuth>true</useMavenSettingsForAuth>&ndash;&gt;
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>
