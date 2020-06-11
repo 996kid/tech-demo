@@ -24,6 +24,7 @@
         <module>guice-demo</module>
         <module>oauth2-demo</module>
         <module>lock-demo</module>
+        <module>sentinel-demo</module>
     </modules>
 
     <distributionManagement>
