@@ -1,0 +1,7 @@
+server:
+  port: 8090
+
+spring:
+  redis:
+    host: 106.13.126.196
+    port: 6379
