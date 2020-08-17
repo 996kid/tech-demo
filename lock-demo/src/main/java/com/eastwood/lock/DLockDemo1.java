@@ -1,6 +1,7 @@
 package com.eastwood.lock;
 
 import org.redisson.Redisson;
+import org.redisson.RedissonRedLock;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -41,6 +42,7 @@ public class DLockDemo1 {
 
     @RequestMapping("/reduceStockWithRedisson")
     public String reduceStockWithRedisson() {
+        RedissonRedLock redLock = new RedissonRedLock();
         RLock lock = redisson.getLock("lock");
         lock.lock(10, TimeUnit.SECONDS);
         System.out.println(Thread.currentThread().getId());

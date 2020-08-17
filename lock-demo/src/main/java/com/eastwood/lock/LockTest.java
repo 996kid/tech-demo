@@ -7,24 +7,39 @@ package com.eastwood.lock;
  * @Date 2020/4/2 14:21
  */
 public class LockTest {
+    //模拟转账锁定两个账户
+    //分别锁账户
+    private Object account1 = new Object();
 
-    public synchronized void aMethod() {
-        System.out.println("a Method is called by " + Thread.currentThread().getName());
-        try {
-            Thread.sleep(3000);
-            System.out.println("lock released ...");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    private Object account2 = new Object();
+
+
+    public void aMethod() {
+        synchronized (account1) {
+            System.out.println(Thread.currentThread().getName() + " locked account1");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            synchronized (account2) {
+                System.out.println(Thread.currentThread().getName() + " locked account2");
+            }
         }
     }
 
-    public synchronized void bMethod() {
-        System.out.println("b Method is called by " + Thread.currentThread().getName());
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+    public void bMethod() {
+        synchronized (account2) {
+            System.out.println(Thread.currentThread().getName() + " locked account2");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            synchronized (account1) {
+                System.out.println(Thread.currentThread().getName() + " locked account1");
+            }
+        }
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -32,8 +47,6 @@ public class LockTest {
         new Thread(() -> {
             lockTest.aMethod();
         }, "A Thread").start();
-        Thread.sleep(1000);
-        System.out.println("main Thread ...");
         new Thread(() -> {
             lockTest.bMethod();
         }, "B Thread").start();
