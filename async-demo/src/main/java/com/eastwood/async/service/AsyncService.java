@@ -16,7 +16,7 @@ import java.util.concurrent.Future;
 @Slf4j
 public class AsyncService {
 
-    @Async("asyncThreadPoolTaskExecutor")
+    @Async("asyncThreadPoolExecutor")
     public Future<String> asyncMethod() {
         try {
             log.info("asyncMethod called, current thread is " + Thread.currentThread().getName());

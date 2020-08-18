@@ -1,10 +1,12 @@
 package com.eastwood.async.config;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.Optional;
+import java.util.concurrent.*;
 
 /**
  * @author 996kid
@@ -15,20 +17,38 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class AsyncThreadPoolConfig {
 
     @Bean
-    public ThreadPoolTaskExecutor asyncThreadPoolTaskExecutor(){
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(20);
-        executor.setMaxPoolSize(200);
-        executor.setQueueCapacity(25);
-        executor.setKeepAliveSeconds(200);
-        executor.setThreadNamePrefix("asyncThread");
-        executor.setWaitForTasksToCompleteOnShutdown(true);
-        executor.setAwaitTerminationSeconds(60);
-
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-
-        executor.initialize();
+    public ThreadPoolExecutor asyncThreadPoolExecutor(){
+//        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+//        executor.setCorePoolSize(20);
+//        executor.setMaxPoolSize(40);
+//        executor.setQueueCapacity(25);
+//        executor.setKeepAliveSeconds(60);
+//        executor.setThreadNamePrefix("asyncThread");
+//        executor.setWaitForTasksToCompleteOnShutdown(true);
+//        executor.setAwaitTerminationSeconds(60);
+//
+//        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+//
+//        executor.initialize();
+//        return executor;
+        //使用concurrent包中的ThreadPoolExecutor
+        //这里指定线程核心池为10 初始化时并不会立即生成10个线程 而是在真正执行任务的时候才生成
+        int corePoolSize = 10;
+        int maximumPoolSize = 20;
+        long keepAliveTime = 5000;
+        BlockingQueue<Runnable> workQueue = new LinkedBlockingDeque<>(10);
+        ThreadFactory threadFactory = new ThreadFactoryBuilder().setThreadFactory(r -> {
+            Thread thread = new Thread(r);
+            return thread;
+        }).setNameFormat("asyn-pool-%d").build();
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize,
+                maximumPoolSize,
+                keepAliveTime,
+                TimeUnit.MILLISECONDS,
+                workQueue,
+                threadFactory, new ThreadPoolExecutor.AbortPolicy());
         return executor;
+
         /**
          * corePoolSize：线程池核心线程的数量，默认值为1（这就是默认情况下的异步线程池配置使得线程不能被重用的原因）。
          *
