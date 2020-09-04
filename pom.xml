@@ -28,6 +28,7 @@
         <module>webflux-demo</module>
         <module>basic-demo</module>
         <module>distribute-transaction-demo</module>
+        <module>mysqlMasterSlave-demo</module>
     </modules>
 
     <distributionManagement>

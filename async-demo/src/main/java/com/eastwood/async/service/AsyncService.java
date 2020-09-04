@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.Future;
 
@@ -17,7 +18,7 @@ import java.util.concurrent.Future;
 public class AsyncService {
 
     @Async("asyncThreadPoolExecutor")
-    public Future<String> asyncMethod() {
+    public ListenableFuture<String> asyncMethod() {
         try {
             log.info("asyncMethod called, current thread is " + Thread.currentThread().getName());
             Thread.sleep(2000);

@@ -24,6 +24,24 @@ public class TestApplication implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return method.invoke(proxy, args);
+        System.out.println("before");
+        Object object = method.invoke(target, args);
+        System.out.println("after");
+        return object;
+    }
+
+
+    public static void main(String[] args) {
+        SpeakerImpl speaker = new SpeakerImpl();
+        Speaker speakerEnhance = (Speaker) new TestApplication().getProxyInstance(speaker);
+        speakerEnhance.announce();
+    }
+}
+
+class SpeakerImpl implements Speaker {
+
+    @Override
+    public void announce() {
+        System.out.println("SpeakerImpl");
     }
 }

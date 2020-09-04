@@ -21,5 +21,6 @@ public class JdkThreadPool {
         TimeUnit.MILLISECONDS,
         workQueue,
         threadFactory, new ThreadPoolExecutor.AbortPolicy());
+        //reject policy
     }
 }
