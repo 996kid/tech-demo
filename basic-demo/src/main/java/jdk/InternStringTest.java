@@ -21,7 +21,6 @@ public class InternStringTest {
 //        System.out.println(b.intern() == d);
 //        System.out.println(b.intern() == f);
 //        System.out.println(b.intern() == a.intern());
-
         String s = new String("1");
         s.intern();
         String s2 = "1";

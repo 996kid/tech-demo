@@ -6,7 +6,7 @@ package com.eastwood.lock;
  * @Author 996kid
  * @Date 2020/4/2 14:21
  */
-public class LockTest {
+public class LockAccountTest {
     //模拟转账锁定两个账户
     //分别锁账户
     private Object account1 = new Object();
@@ -43,12 +43,44 @@ public class LockTest {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        LockTest lockTest = new LockTest();
+        //死锁测试
+//        LockAccountTest lockTest = new LockAccountTest();
+//        new Thread(() -> {
+//            lockTest.aMethod();
+//        }, "A Thread").start();
+//        new Thread(() -> {
+//            lockTest.bMethod();
+//        }, "B Thread").start();
+        // synchronized(A.class) 测试
+        A a1 = new LockAccountTest.A();
+        A a2 = new LockAccountTest.A();
         new Thread(() -> {
-            lockTest.aMethod();
-        }, "A Thread").start();
+             a1.hi();
+         }).start();
+        System.out.println("main thread running");
         new Thread(() -> {
-            lockTest.bMethod();
-        }, "B Thread").start();
+            a2.hello();
+        }).start();
+    }
+
+
+
+    static class A {
+        void hi() {
+            synchronized (A.class) {
+                System.out.println("hi");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        void hello() {
+            synchronized (A.class) {
+                System.out.println("hello");
+            }
+        }
     }
 }

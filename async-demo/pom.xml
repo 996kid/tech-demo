@@ -34,6 +34,11 @@
             <version>29.0-jre</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
     </dependencies>
 
 
@@ -43,7 +48,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.eastwood.async.AsyncApplication</mainClass>
+                    <mainClass>com.eastwood.AsyncApplication</mainClass>
                     <finalName>${project.name}</finalName>
                 </configuration>
             </plugin>
