@@ -19,7 +19,6 @@
         <module>common</module>
         <module>spring-boot-autoconfiguration-demo</module>
         <module>spring-security-demo</module>
-        <module>stream-demo</module>
         <module>rabbitmq-demo</module>
         <module>guice-demo</module>
         <module>lock-demo</module>

@@ -21,7 +21,7 @@ public class ReentrantLockTest {
      * 1,支持中断的API :给阻塞的线程发送中断信号的时候，能够唤醒它，那它就有机会释放曾经持有的锁 A
      void lockInterruptibly()
      throws InterruptedException;
-     * 2,支持超时的API, 一段时间内没有获取到锁，跑出异常
+     * 2,支持超时的API, 一段时间内没有获取到锁，抛出异常
      boolean tryLock(long time, TimeUnit unit)
      throws InterruptedException;
      * 3,支持非阻塞获取锁的API，如果尝试获取锁失败，并不进入阻塞状态，而是直接返回
@@ -94,6 +94,7 @@ public class ReentrantLockTest {
                             try {
                                 this.balance -= amt;
                                 tar.balance += amt;
+                                break;
                             } finally {
                                 tar.lock.unlock();
                             }
