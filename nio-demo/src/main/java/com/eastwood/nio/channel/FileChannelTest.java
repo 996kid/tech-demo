@@ -1,6 +1,5 @@
 package com.eastwood.nio.channel;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -15,7 +14,7 @@ import java.nio.channels.FileChannel;
 public class FileChannelTest {
 
     public static void main(String[] args) throws IOException {
-        RandomAccessFile aFile = new RandomAccessFile("D:/git-repository/tech-demo/nio-demo/src/main/resources/data/nio-data.txt", "rw");
+        RandomAccessFile aFile = new RandomAccessFile("D:/IDEA/github.com/tech-demo/nio-demo/src/main/resources/data/nio-data.txt", "rw");
         FileChannel inChannel = aFile.getChannel();
 
         ByteBuffer buf = ByteBuffer.allocate(48);
@@ -24,7 +23,7 @@ public class FileChannelTest {
         while (bytesRead != -1) {
 
             System.out.println("Read " + bytesRead);
-            /**
+            /** 写模式切换为读模式
              * limit = position;
              * position = 0;
              * mark = -1;
