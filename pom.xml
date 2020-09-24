@@ -28,6 +28,8 @@
         <module>basic-demo</module>
         <module>distribute-transaction-demo</module>
         <module>mysqlMasterSlave-demo</module>
+        <module>reactor-demo</module>
+        <module>netty-demo</module>
     </modules>
 
     <distributionManagement>
