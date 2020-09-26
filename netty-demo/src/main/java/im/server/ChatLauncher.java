@@ -1,6 +1,5 @@
 package im.server;
 
-import com.corundumstudio.socketio.AckCallback;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
 
@@ -16,14 +15,19 @@ public class ChatLauncher {
         server.addEventListener("chatevent", ChatObject.class, (client, data, ackRequest) -> {
             // broadcast messages to all clients
             server.getBroadcastOperations().sendEvent("chatevent", data);
-            System.out.println(data.getMessage());
-            client.sendEvent("got it", new AckCallback<String>(String.class) {
-                @Override
-                public void onSuccess(String o) {
-                    System.out.println("ack from client: " + client.getSessionId());
-                }
-            });
 //            server.getRoomOperations("myroom").sendEvent("chatevent", data);
+        });
+
+        server.addConnectListener(client -> {
+            System.out.println("namespace: " + client.getNamespace().getName());
+            System.out.println("sessionId: " + client.getSessionId());
+            System.out.println("remoteAddress: " + client.getRemoteAddress());
+            System.out.println("handShakeData: " +
+                    client.getHandshakeData().getUrl() + ", " + client.getHandshakeData().getUrlParams());
+        });
+
+        server.addDisconnectListener(client -> {
+            System.out.println("disconnected: " + client.getSessionId());
         });
 
         server.start();
