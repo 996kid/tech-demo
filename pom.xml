@@ -30,6 +30,7 @@
         <module>mysqlMasterSlave-demo</module>
         <module>reactor-demo</module>
         <module>netty-demo</module>
+        <module>rocketmq-demo</module>
     </modules>
 
     <distributionManagement>
