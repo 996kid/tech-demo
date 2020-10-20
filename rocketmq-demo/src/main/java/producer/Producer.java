@@ -2,7 +2,6 @@ package producer;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
-import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageQueue;
@@ -18,8 +17,11 @@ import java.util.List;
 public class Producer {
 
     public static void main(String[] args) throws Exception {
-        DefaultMQProducer producer = new DefaultMQProducer("producerGroup1");
+        DefaultMQProducer producer = new DefaultMQProducer("producerGroup1", true);
         producer.setNamesrvAddr("127.0.0.1:9876");
+        //设置发送失败重试次数 默认为重试两次 可能导致消息重复
+        producer.setRetryTimesWhenSendFailed(0);
+//        producer.setRetryTimesWhenSendAsyncFailed(0);
         producer.start();
         for (int i = 0; i < 100; i++) {
             //同步发送消息, 使用keys分区
@@ -36,7 +38,7 @@ public class Producer {
             }, i);
             System.out.printf("SendResult: %s, queueId: %s %n", sendResult, sendResult.getMessageQueue().getQueueId());
         }
-        System.out.println("all sended...");
+        System.out.println("all send...");
         producer.shutdown();
     }
     /**

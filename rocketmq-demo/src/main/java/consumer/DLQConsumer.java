@@ -26,7 +26,7 @@ public class DLQConsumer {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
                 // 返回此状态会判断是否存在重试topic 没有就创建
-                //一直重试
+                // 默认重试16次
                 return ConsumeConcurrentlyStatus.RECONSUME_LATER;
             }
         });
