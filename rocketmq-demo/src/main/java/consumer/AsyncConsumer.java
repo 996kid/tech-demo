@@ -20,11 +20,10 @@ public class AsyncConsumer {
     public static void main(String[] args) throws MQClientException {
         // 实例化消费者
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("consumerGroup2");
-
         // 设置NameServer的地址
         consumer.setNamesrvAddr("localhost:9876");
         //默认集群消费
-//        consumer.setMessageModel(MessageModel.BROADCASTING);
+        consumer.setMessageModel(MessageModel.BROADCASTING);
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         consumer.subscribe("topic1", "async");
         // 注册回调实现类来处理从broker拉取回来的消息

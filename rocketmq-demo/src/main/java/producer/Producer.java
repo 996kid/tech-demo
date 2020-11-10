@@ -27,15 +27,15 @@ public class Producer {
             //同步发送消息, 使用keys分区
             Message message = new Message("topic1", "inOrder", "messageId_" + i,
                     ("hello world" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
-//            SendResult sendResult = producer.send(message);
-            SendResult sendResult = producer.send(message, new MessageQueueSelector() {
-                @Override
-                public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {
-                    //根据i 分区
-                    int index = (int) arg % mqs.size();
-                    return mqs.get(index);
-                }
-            }, i);
+            SendResult sendResult = producer.send(message);
+//            SendResult sendResult = producer.send(message, new MessageQueueSelector() {
+//                @Override
+//                public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {
+//                    //根据i 分区
+//                    int index = (int) arg % mqs.size();
+//                    return mqs.get(index);
+//                }
+//            }, i);
             System.out.printf("SendResult: %s, queueId: %s %n", sendResult, sendResult.getMessageQueue().getQueueId());
         }
         System.out.println("all send...");

@@ -28,6 +28,8 @@ public class DLQConsumer {
                 // 返回此状态会判断是否存在重试topic 没有就创建
                 // 默认重试16次
                 return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+//                return null;
+//                throw new RuntimeException();
             }
         });
         System.out.println("all consumed...");
