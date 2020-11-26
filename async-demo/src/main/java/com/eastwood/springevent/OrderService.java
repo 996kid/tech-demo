@@ -14,11 +14,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderService implements ApplicationEventPublisherAware {
 
-    @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 
-//    @Autowired
-//    private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /**
      * 下单除了发短信外 后续可能增加或减少 其他通知业务
@@ -28,7 +27,10 @@ public class OrderService implements ApplicationEventPublisherAware {
      */
     public void createOrder() {
         System.out.println("下单成功");
+        //both works
         applicationEventPublisher.publishEvent(new NewOrderEvent(this));
+        applicationContext.publishEvent(new NewOrderEvent(this));
+
         System.out.println("create order finished...");
         //发送短信
         //sendMsg();

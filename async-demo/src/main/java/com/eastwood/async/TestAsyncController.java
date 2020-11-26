@@ -1,6 +1,7 @@
 package com.eastwood.async;
 
 import com.eastwood.async.service.AsyncService;
+import com.eastwood.springevent.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -21,6 +22,9 @@ public class TestAsyncController extends BaseController{
 
     @Autowired
     private AsyncService asyncService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/async")
     public void async() {
@@ -51,5 +55,10 @@ public class TestAsyncController extends BaseController{
     @GetMapping("/")
     public String helloWorld() {
         return "hello-world";
+    }
+
+    @GetMapping("/eventTest")
+    public void eventTest() {
+        orderService.createOrder();
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author 996kid
- * @desription 测试spring boot 异步调用,处理异步调用返回值
+ * @desription <p>测试spring boot 相关的内容诶</p>
  * @date 2019/10/30
  */
 @SpringBootApplication
