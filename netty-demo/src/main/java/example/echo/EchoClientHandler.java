@@ -37,7 +37,8 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        ctx.write(msg);
+        System.out.println(msg);
+        System.out.println("时间就是金钱 我的朋友");
     }
 
     @Override

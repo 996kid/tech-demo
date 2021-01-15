@@ -39,7 +39,7 @@ public class Producer {
             System.out.printf("SendResult: %s, queueId: %s %n", sendResult, sendResult.getMessageQueue().getQueueId());
         }
         System.out.println("all send...");
-        producer.shutdown();
+//        producer.shutdown();
     }
     /**
      * 1. 消息类型： 普通消息，顺序消息，定时和延时消息，事务消息
