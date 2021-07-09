@@ -44,23 +44,23 @@ public class LockAccountTest {
 
     public static void main(String[] args) throws InterruptedException {
         //死锁测试
-//        LockAccountTest lockTest = new LockAccountTest();
-//        new Thread(() -> {
-//            lockTest.aMethod();
-//        }, "A Thread").start();
-//        new Thread(() -> {
-//            lockTest.bMethod();
-//        }, "B Thread").start();
-        // synchronized(A.class) 测试
-        A a1 = new LockAccountTest.A();
-        A a2 = new LockAccountTest.A();
+        LockAccountTest lockTest = new LockAccountTest();
         new Thread(() -> {
-             a1.hi();
-         }).start();
-        System.out.println("main thread running");
+            lockTest.aMethod();
+        }, "A Thread").start();
         new Thread(() -> {
-            a2.hello();
-        }).start();
+            lockTest.bMethod();
+        }, "B Thread").start();
+//         synchronized(A.class)
+//        A a1 = new LockAccountTest.A();
+//        A a2 = new LockAccountTest.A();
+//        new Thread(() -> {
+//             a1.hi();
+//         }).start();
+//        System.out.println("main thread running");
+//        new Thread(() -> {
+//            a2.hello();
+//        }).start();
     }
 
 

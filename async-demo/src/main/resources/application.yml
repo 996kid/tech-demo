@@ -8,3 +8,6 @@ spring:
     static-path-pattern: /upload/**
   resources:
     static-locations: classpath:default/
+  redis:
+    host: localhost
+    port: 6379

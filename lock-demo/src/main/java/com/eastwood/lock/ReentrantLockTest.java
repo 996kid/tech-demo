@@ -85,7 +85,7 @@ public class ReentrantLockTest {
         private int balance;
         private final Lock lock
                 = new ReentrantLock();
-        // 转账
+        // 转账 活锁案例
         void transfer(Account tar, int amt){
             while (true) {
                 if(this.lock.tryLock()) {

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  *              常见的ApplicationContextAware aware类接口都存在相应的processor接口
  * @Date 2020/11/20 17:30
  */
-@Component
+//@Component
 public class SimpleBeanPostProcessor implements BeanPostProcessor {
 
     @Override

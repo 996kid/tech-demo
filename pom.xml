@@ -23,7 +23,6 @@
         <module>guice-demo</module>
         <module>lock-demo</module>
         <module>sentinel-demo</module>
-        <module>nio-demo</module>
         <module>webflux-demo</module>
         <module>basic-demo</module>
         <module>distribute-transaction-demo</module>
@@ -31,6 +30,7 @@
         <module>reactor-demo</module>
         <module>netty-demo</module>
         <module>rocketmq-demo</module>
+        <module>websocket-demo</module>
     </modules>
 
     <distributionManagement>

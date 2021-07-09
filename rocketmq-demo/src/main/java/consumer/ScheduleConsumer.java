@@ -27,6 +27,7 @@ public class ScheduleConsumer {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> messages, ConsumeConcurrentlyContext context) {
                 // 延迟消息 消息生成 和 消息store 之间延迟
+                // 在broker中延迟保存
                 for (MessageExt message : messages) {
                     // Print approximate delay time period
                     System.out.println("Receive message[msgId=" + message.getMsgId() + "] " + (message.getStoreTimestamp() - message.getBornTimestamp()) + "ms later");

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @Description SimpleBeanPostProcessor2
  * @Date 2020/12/2 11:35
  */
-@Component
+//@Component
 public class SimpleBeanPostProcessor2 implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
