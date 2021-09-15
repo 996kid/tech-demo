@@ -28,21 +28,26 @@ public class TransactionProducer {
         producer.setTransactionListener(transactionListener);
         producer.start();
 
-        String[] tags = new String[] {"TagA", "TagB", "TagC", "TagD", "TagE"};
-        for (int i = 0; i < 10; i++) {
-            try {
-                Message msg =
-                    new Message("TopicTest1234", tags[i % tags.length], "KEY" + i,
-                        ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
-                SendResult sendResult = producer.sendMessageInTransaction(msg, null);
-                System.out.printf("%s%n", sendResult);
-
-                Thread.sleep(10);
-            } catch (MQClientException | UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
-
+        //官方例子
+//        String[] tags = new String[] {"TagA", "TagB", "TagC", "TagD", "TagE"};
+//        for (int i = 0; i < 10; i++) {
+//            try {
+//                Message msg =
+//                    new Message("TopicTest1234", tags[i % tags.length], "KEY" + i,
+//                        ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
+//                SendResult sendResult = producer.sendMessageInTransaction(msg, null);
+//                System.out.printf("%s%n", sendResult);
+//
+//                Thread.sleep(10);
+//            } catch (MQClientException | UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        // 极客时间 消息队列高手课 生成订单 清空购物车事务实例
+        // 发送清空购物车消息 异步清空购物车
+        Message message = new Message("shoppingTopic", "clear shopping cart".getBytes());
+        SendResult sendResult = producer.sendMessageInTransaction(message, null);
+        System.out.println(sendResult);
         for (int i = 0; i < 100000; i++) {
             Thread.sleep(1000);
         }

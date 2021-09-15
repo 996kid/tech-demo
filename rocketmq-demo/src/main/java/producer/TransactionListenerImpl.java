@@ -13,6 +13,13 @@ public class TransactionListenerImpl implements TransactionListener {
 
     private ConcurrentHashMap<String, Integer> localTrans = new ConcurrentHashMap<>();
 
+    /**
+     *  当发送半消息成功，这个方法将会被调用来执行本地事务
+     * @param msg
+     * @param arg
+     * @return
+     */
+    // 生成订单
     @Override
     public LocalTransactionState executeLocalTransaction(Message msg, Object arg) {
         int value = transactionIndex.getAndIncrement();
@@ -21,6 +28,12 @@ public class TransactionListenerImpl implements TransactionListener {
         return LocalTransactionState.UNKNOW;
     }
 
+    /**
+     *  当半消息没有收到 commit/rollback请求时，这个方法将会被调用来确认本地事务状态
+     * @param msg
+     * @return
+     */
+    // 查询本地事务
     @Override
     public LocalTransactionState checkLocalTransaction(MessageExt msg) {
         Integer status = localTrans.get(msg.getTransactionId());

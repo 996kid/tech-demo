@@ -9,5 +9,6 @@ public class KindsOfFuture {
 
     public static void main(String[] args) {
 
+
     }
 }
