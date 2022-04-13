@@ -16,9 +16,11 @@
 package example.echo;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -27,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
  * the server.
  */
 @Slf4j
-public class EchoClientHandler extends ChannelInboundHandlerAdapter {
+public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     private final ByteBuf firstMessage;
 
@@ -47,9 +49,8 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        ctx.write(msg);
-        log.info("Client received: {}", msg);
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+        System.out.println("Client received: " + ByteBufUtil.hexDump(msg.readBytes(msg.readableBytes())));
     }
 
     @Override

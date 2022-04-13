@@ -1,8 +1,6 @@
-package delayedqueue;
+package queue;
 
-import java.util.concurrent.DelayQueue;
-import java.util.concurrent.Delayed;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author 996kid@gmail.com
@@ -13,13 +11,32 @@ public class JavaBasedDelayQueueDemo {
 
     private static DelayQueue<DelayedItem> delayQueue = new DelayQueue<>();
 
+    private static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(4);
+
     public static void main(String[] args) throws InterruptedException {
         delayQueue.add(
                 new JavaBasedDelayQueueDemo.DelayedItem("aaa", System.currentTimeMillis() + 5000));
         delayQueue.add(
                 new JavaBasedDelayQueueDemo.DelayedItem("bbb", System.currentTimeMillis() + 10000));
+//        delayQueue.remove()
         System.out.println(delayQueue.take().getItemInfo());
         System.out.println(delayQueue.take().getItemInfo());
+
+
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        }, 3000);
+
+        scheduledExecutorService.schedule(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 1000, TimeUnit.MILLISECONDS);
     }
     static class DelayedItem implements Delayed {
 

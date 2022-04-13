@@ -10,6 +10,7 @@ public class BubbleSortTest {
     public static void main(String[] args) {
         int[] array = {1,2,31,4,54,9,12};
         bubbleSort(array);
+        print(array);
     }
 
     /**
@@ -23,14 +24,17 @@ public class BubbleSortTest {
                 }
             }
         }
-        for (int i : array) {
-            System.out.println(i);
-        }
     }
 
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+
+    private static void print(int[] array) {
+        for (int i : array) {
+            System.out.print(i + ",");
+        }
     }
 }
