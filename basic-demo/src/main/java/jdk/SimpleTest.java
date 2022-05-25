@@ -1,6 +1,8 @@
 package jdk;
 
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -57,6 +59,14 @@ public class SimpleTest {
 
         String a = "hello world!";
         System.out.println(a.substring(a.length() - 3));
+
+
+        // Map
+        Map map1 = new ConcurrentHashMap<>();
+        Map map2 = new ConcurrentSkipListMap<>();
+        Map map3 = new HashMap();
+        Map map4 = new TreeMap();
+        Map map5 = new Hashtable();
     }
 
 }

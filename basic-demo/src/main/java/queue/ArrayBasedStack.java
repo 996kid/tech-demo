@@ -31,4 +31,9 @@ public class ArrayBasedStack {
             stack[pointer++] = element;
         }
     }
+
+    public static void main(String[] args) {
+        Integer i = 1;
+        System.out.println(1 == i);
+    }
 }

@@ -27,7 +27,7 @@ public class ReentrantLockTest {
      * 3,支持非阻塞获取锁的API，如果尝试获取锁失败，并不进入阻塞状态，而是直接返回
      boolean tryLock();
      */
-    private final Lock rtl =
+    private final ReentrantLock rtl =
             new ReentrantLock();
     int value;
 
@@ -44,7 +44,7 @@ public class ReentrantLockTest {
 
 
     class X {
-        private final Lock rtl =
+        private final ReentrantLock rtl =
                 new ReentrantLock();
         int value;
         public int get() {

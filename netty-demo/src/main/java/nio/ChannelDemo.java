@@ -26,6 +26,11 @@ public class ChannelDemo {
                 ChannelDemo.class.getClassLoader().getResource("data/toFile.txt").getFile(), "rw");
         FileChannel toChannel = toFile.getChannel();
         toChannel.transferFrom(fromChannel, 0, fromChannel.size());
+
+        for (long count = fromChannel.size() ;count>0 ;) {
+            long transferred = fromChannel.transferTo(fromChannel.position(), count, toChannel);
+            fromChannel.position(fromChannel.position() + transferred); count -= transferred;
+        }
     }
 
 

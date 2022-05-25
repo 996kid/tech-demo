@@ -20,7 +20,7 @@ public class StringInternTest {
 //        System.out.println("3");
 //        System.out.println("4");
 
-        test3();
+        test4();
     }
 
 
@@ -32,15 +32,15 @@ public class StringInternTest {
         String s5 = "hello" + s2;
         String s6 = s1 + s2;
         String s7 = "helloworld";
-        System.out.println(s3 == s7);
-        System.out.println(s3 == s6);
-        System.out.println(s3 == s4);
-        System.out.println(s3 == s5);
-        try {
-            Thread.sleep(1000000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println(s3 == s7); // true
+        System.out.println(s3 == s6); // false
+        System.out.println(s3 == s4); // false
+        System.out.println(s3 == s5); // false
+//        try {
+//            Thread.sleep(1000000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void test2() {
@@ -48,9 +48,9 @@ public class StringInternTest {
         String s2 = new String("world");
         String s3 = s2.intern();
 
-        System.out.println(s1 == s2);
-        System.out.println(s1 == s3);
-        System.out.println(s2 == s3);
+        System.out.println(s1 == s2);//false
+        System.out.println(s1 == s3);//true
+        System.out.println(s2 == s3);//false
     }
 
     public static void test3() {
@@ -58,16 +58,17 @@ public class StringInternTest {
         String s1 = new String("abc");
         s1.intern();
         String s2 = "abc";
-        System.out.println(s1 == s2);
+        System.out.println(s1 == s2); //false
     }
 
     public static void test4() {
         // 不会在字符串常量池中生成 abc字面量
         String s1 = new String("ab") + new String("c");
-        // 字符创常量池
+        // 如果字符串常量池没有则新建返回引用， 有则直接返回引用； 这里没有但是堆区中存在“abc”,
+        //会优化为新建一个直接指向堆区的引用
         s1.intern();
         String s2 = "abc";
-        System.out.println(s1 == s2);
+        System.out.println(s1 == s2);//true
     }
 
     // intern 空间效率测试
