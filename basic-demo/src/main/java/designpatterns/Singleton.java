@@ -10,6 +10,11 @@ public class Singleton {
 
 //    private static Singleton singleton = new Singleton();
 
+    //私有化构造器
+    private Singleton() {
+
+    }
+
     private static Singleton singleton;
 
     public static Singleton getInstance() {
@@ -23,4 +28,11 @@ public class Singleton {
         return singleton;
     }
 
+    public void print() {
+        System.out.println("hi");
+    }
+
+    public static void main(String[] args) {
+        Singleton.getInstance().print();
+    }
 }
