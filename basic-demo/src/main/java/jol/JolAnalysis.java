@@ -17,7 +17,7 @@ public class JolAnalysis implements Runnable{
 
     public static void main(String[] args) {
         Object object = new Object();
-        System. out.println(ClassLayout.parseInstance(object).toPrintable());
+        System.out.println(ClassLayout.parseInstance(object).toPrintable());
         Thread t = new Thread(new JolAnalysis());
         t.start();
     }

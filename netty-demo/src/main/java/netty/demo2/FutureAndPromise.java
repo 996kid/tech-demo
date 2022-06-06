@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 public class FutureAndPromise {
 
     public static void main(String[] args) {
-//        test1();
+        test1();
         
 //        test2();
 
@@ -26,7 +26,7 @@ public class FutureAndPromise {
 
 //        test5();
 
-        test6();
+//        test6();
     }
 
     /**
@@ -188,7 +188,6 @@ public class FutureAndPromise {
     private static void test1() {
         DefaultEventLoop eventExecutors = new DefaultEventLoop();
         DefaultPromise<Integer> promise = new DefaultPromise<>(eventExecutors);
-        Flag flag = new Flag();
         eventExecutors.execute(()->{
             try {
                 Thread.sleep(1000);
@@ -197,14 +196,12 @@ public class FutureAndPromise {
             }
             log.debug("set success, {}",10);
             promise.setSuccess(10);
-            flag.setI(20);
         });
 
         log.debug("start...");
         log.debug("{}",promise.getNow()); // 还没有结果
         try {
-            log.debug("{}", flag.getI());
-            log.debug("{}",promise.get());
+            log.debug("{}", promise.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

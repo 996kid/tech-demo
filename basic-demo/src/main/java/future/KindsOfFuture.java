@@ -17,11 +17,17 @@ import java.util.concurrent.*;
 public class KindsOfFuture {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        Map<String, Object> m = new HashMap<>();
-        m.put("111", null);
-        System.out.println(m);
 //        test1();
+        futureTaskDemo();
     }
+
+    //可执行的future
+    public static void futureTaskDemo() throws ExecutionException, InterruptedException {
+        FutureTask futureTask = new FutureTask(() -> 1 + 2);
+        new Thread(futureTask).start();
+        System.out.println(futureTask.get());
+    }
+
 
 
     public static void async() {
