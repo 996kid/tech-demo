@@ -39,6 +39,7 @@ public class NonBlockingEchoServer {
                 System.out.println("NonBlockingEchoServer异常!" + e.getMessage());
             }
             Set<SelectionKey> readyKeys = selector.selectedKeys();
+            System.out.println(readyKeys);
             Iterator<SelectionKey> iterator = readyKeys.iterator();
             while (iterator.hasNext()) {
                 SelectionKey key = iterator.next();

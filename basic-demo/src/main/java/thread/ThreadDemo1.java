@@ -19,12 +19,19 @@ public class ThreadDemo1 {
              }
              System.out.println("started..");
          });
+         //守护线程   没有非守护线程的时候 JVM退出进程
+        thread.setDaemon(true);
         thread.start();
-        try {
-            Thread.sleep(500);
-            thread.interrupt();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // 让出CPU使用权
+        Thread.yield();
+//        try {
+//            Thread.sleep(500);
+//            thread.interrupt();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        System.out.println("hello");
+
+
     }
 }

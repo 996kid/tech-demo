@@ -1,12 +1,16 @@
 package producer;
 
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageQueue;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
+import org.apache.rocketmq.remoting.exception.RemotingException;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /** 建议同一个 Group ID 只对应一种类型的 Topic，即一个TOPIC不同时用于顺序消息和无序消息的收发
@@ -25,9 +29,11 @@ public class Producer {
         producer.start();
         for (int i = 0; i < 100; i++) {
             //同步发送消息, 使用keys分区
-            Message message = new Message("topic1", "inOrder", "messageId_" + i,
+            Message message = null;
+            message = new Message("topic1", "inOrder", "messageId_" + i,
                     ("hello world" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
-            SendResult sendResult = producer.send(message);
+            SendResult sendResult = null;
+            sendResult = producer.send(message);
 //            SendResult sendResult = producer.send(message, new MessageQueueSelector() {
 //                @Override
 //                public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {

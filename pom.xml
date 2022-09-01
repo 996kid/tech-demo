@@ -20,7 +20,6 @@
         <module>spring-boot-autoconfiguration-demo</module>
         <module>spring-security-demo</module>
         <module>rabbitmq-demo</module>
-        <module>guice-demo</module>
         <module>lock-demo</module>
         <module>sentinel-demo</module>
         <module>webflux-demo</module>
@@ -31,6 +30,7 @@
         <module>netty-demo</module>
         <module>rocketmq-demo</module>
         <module>websocket-demo</module>
+        <module>transaction-demo</module>
     </modules>
 
     <distributionManagement>

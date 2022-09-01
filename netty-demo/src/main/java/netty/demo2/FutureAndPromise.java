@@ -162,24 +162,12 @@ public class FutureAndPromise {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            log.debug("set success, {}",10);
             promise.setSuccess(10);
+            log.debug("set success, {}",10);
         });
 
         log.debug("start...");
         eventExecutors.shutdownGracefully();
-    }
-
-    static class Flag {
-        int i = 0;
-
-        public int getI() {
-            return i;
-        }
-
-        public void setI(int i) {
-            this.i = i;
-        }
     }
 
     /**
@@ -194,8 +182,8 @@ public class FutureAndPromise {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            log.debug("set success, {}",10);
             promise.setSuccess(10);
+            log.debug("set success, {}",10);
         });
 
         log.debug("start...");

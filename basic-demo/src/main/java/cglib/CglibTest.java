@@ -1,8 +1,6 @@
 package cglib;
 
-import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.NoOp;
 
 public class CglibTest {
 

@@ -10,7 +10,7 @@ import java.util.concurrent.*;
  */
 public class ThreadStateTest {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         int corePoolSize = 4;
         int maximumPoolSize = 10;
         long keepAliveTime = 5000;
@@ -33,43 +33,31 @@ public class ThreadStateTest {
         );
 
         // execute抛出未捕获的异常 当前线程会终止
-        executor.execute(() -> {
-            try {
-                System.out.println("My task is started running...");
-                System.out.println("Currend thread is " + Thread.currentThread().getId());
-                // ...
-                anotherMethod();
-                // ...
-            } catch (Throwable t) {
-                System.err.println("Uncaught exception is detected! " + t
-                        + " st: " + Arrays.toString(t.getStackTrace()));
-                throw t;
-//            // ... Handle the exception
-            }
+//        executor.execute(() -> {
+//            try {
+//                System.out.println("My task is started running...");
+//                System.out.println("Currend thread is " + Thread.currentThread().getId());
+//                anotherMethod();
+//            } catch (Throwable t) {
+//                System.err.println("Uncaught exception is detected! " + t
+//                        + " st: " + Arrays.toString(t.getStackTrace()));
+//                throw t;
+//            }
+//        });
 
-
-//            System.out.println(Thread.currentThread().getId());
-//            int i = 10 / 0;
-        });
-
+        // 真是没理解啊！！！
         Future future = executor.submit(() -> {
             try {
                 System.out.println("My task is started running...");
                 System.out.println("Currend thread is " + Thread.currentThread().getId());
-                // ...
                 anotherMethod();
-                // ...
             } catch (Throwable t) {
-            System.err.println("Uncaught exception is detected! " + t
+                System.err.println("Uncaught exception is detected! " + t
                     + " st: " + Arrays.toString(t.getStackTrace()));
-//            // ... Handle the exception
-        }
-
-
-            System.out.println(Thread.currentThread().getId());
-            int i = 10 / 0;
+                throw t;
+            }
         });
-
+        future.get();
         Thread.sleep(1000000);
         executor.shutdown();
     }

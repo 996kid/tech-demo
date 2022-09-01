@@ -17,12 +17,18 @@ public class HashMapTest {
     public static void main(String[] args) {
         Map map = new HashMap<>();
 
+        int i = 1 << 4;
+        int j = 1 << 16;
+        System.out.println(i);
+        System.out.println((i - 1) & 35);
+        System.out.println(j);
+
         ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
-
-        Map hashTable = new Hashtable();
-
-        ThreadLocal threadLocal = new ThreadLocal();
-
-        Lock locl = new ReentrantLock();
+//
+//        Map hashTable = new Hashtable();
+//
+//        ThreadLocal threadLocal = new ThreadLocal();
+//
+//        Lock locl = new ReentrantLock();
     }
 }

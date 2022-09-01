@@ -1,17 +1,19 @@
 package thread;
 
 
-/**
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.locks.ReentrantLock;
+
+/** 交替打印
  * @author 996kid@gmail.com
  * @Description ThreadTest
  * @Date 2022/3/25 11:45
  */
 public class ThreadTest {
 
-    private final static PrintUtil o = new PrintUtil();
-
-    // 为0时打印数字 为1时打印字母
-    volatile static int state = 0;
+    private final static PrintUtil2 o = new PrintUtil2();
 
 //    final static Object object2 = new Object();
 
@@ -40,12 +42,16 @@ public class ThreadTest {
         thread2.start();
     }
 
-    static class PrintUtil {
+    // synchronized wait notify
+    static class PrintUtil1 {
 
          synchronized void printNum() throws InterruptedException {
             for (int i = 1; i <=26; i++) {
                 System.out.print(i);
                 this.notify();
+                if (i == 26) {
+                    break;
+                }
                 this.wait();
             }
         }
@@ -54,7 +60,58 @@ public class ThreadTest {
             for (int i = 97; i <= 97 + 25; i++) {
                 System.out.print((char) i);
                 this.notify();
+                if (i == 97 + 25) {
+                    break;
+                }
                 this.wait();
+            }
+        }
+    }
+
+    // lock condition await signal
+    static class PrintUtil2 {
+
+        Lock lock = new ReentrantLock();
+        Condition condition = lock.newCondition();
+
+        void printNum() throws InterruptedException {
+            lock.lock();
+            for (int i = 1; i <=26; i++) {
+                System.out.print(i);
+                condition.signal();
+                if (i == 26) {
+                    break;
+                }
+                condition.await();
+            }
+            lock.unlock();
+        }
+
+        synchronized void printCharacter() throws InterruptedException {
+            lock.lock();
+            for (int i = 97; i <= 97 + 25; i++) {
+                System.out.print((char) i);
+                condition.signal();
+                if (i == 97 + 25) {
+                    break;
+                }
+                condition.await();
+            }
+            lock.unlock();
+        }
+    }
+
+    static class PrintUtil3 {
+
+        void printNum() throws InterruptedException {
+            for (int i = 1; i <=26; i++) {
+                System.out.print(i);
+            }
+        }
+
+        synchronized void printCharacter() throws InterruptedException {
+            for (int i = 97; i <= 97 + 25; i++) {
+                System.out.print((char) i);
             }
         }
     }

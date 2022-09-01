@@ -67,6 +67,7 @@ public class SimpleTest {
         Map map3 = new HashMap();
         Map map4 = new TreeMap();
         Map map5 = new Hashtable();
+        TreeSet treeSet = new TreeSet();
     }
 
 }

@@ -30,4 +30,38 @@ public class VolatileExample {
 
     }
   }
+
+
+//  volatile int abc = 0;
+
+  int abc = 0;
+  volatile int state = 0;
+
+  void thinking1() {
+    abc = 3;
+    state = 1;
+  }
+
+  void thinking2() {
+    if (state == 1) {
+        // abc = 3
+    }
+  }
+
+
+
+  void thinking3() {
+    synchronized (this) {
+      abc = 3;
+    }
+  }
+
+  void thinking4() {
+    synchronized (this) {
+      if (abc == 3) {
+
+      }
+    }
+  }
+
 }

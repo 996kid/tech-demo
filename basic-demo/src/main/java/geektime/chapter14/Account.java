@@ -1,5 +1,6 @@
 package geektime.chapter14;
 
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,6 +19,11 @@ public class Account {
         // 转账
         void transfer(Account tar, int amt){
             while (true) {
+                try {
+                    Thread.sleep(new Random(100).nextInt());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 if(this.lock.tryLock()) {
                     try {
                         if (tar.lock.tryLock()) {

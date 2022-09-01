@@ -15,7 +15,7 @@ public class Singleton {
 
     }
 
-    private static Singleton singleton;
+    private volatile static Singleton singleton;
 
     public static Singleton getInstance() {
         if (singleton == null) {

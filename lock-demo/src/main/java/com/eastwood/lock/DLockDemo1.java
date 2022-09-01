@@ -42,7 +42,7 @@ public class DLockDemo1 {
     public String reduceStockWithRedisson() {
         RedissonRedLock redLock = new RedissonRedLock();
         RLock lock = redisson.getLock("lock");
-        lock.lock(10, TimeUnit.SECONDS);
+        lock.lock();
         System.out.println(Thread.currentThread().getId());
         try {
             int stock = Integer.parseInt(stringRedisTemplate.opsForValue().get("amount"));

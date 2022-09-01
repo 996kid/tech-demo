@@ -1,10 +1,7 @@
 package nianbaobanbao;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -25,8 +22,13 @@ public class FixedLengthFrameServer {
     void start() {
         NioEventLoopGroup boss = new NioEventLoopGroup(1);
         NioEventLoopGroup worker = new NioEventLoopGroup();
+
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
+            //serverBootstrap.option(ChannelOption.SO_RCVBUF, 10)
+            //影响的底层接收缓冲区（即滑动窗口）大小，仅决定了 netty 读取的最小单位，
+            //netty 实际每次读取的一般是它的整数倍
+//            serverBootstrap.option(ChannelOption.SO_RCVBUF, 10);
             serverBootstrap.channel(NioServerSocketChannel.class);
             serverBootstrap.group(boss, worker);
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
