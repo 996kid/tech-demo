@@ -3,6 +3,7 @@ package com.eastwood.redisson.delayqueue;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
 import org.redisson.api.RedissonClient;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @Description DelayQueueService   基于redisson的延迟队列本质： 使用HashedWheelTimer延迟放入阻塞队列
  * @Date 2022/2/28 15:56
  */
+@Service
 public class DelayQueueService {
     
     @Resource
@@ -27,6 +29,19 @@ public class DelayQueueService {
         redissonBlockingQueue = redissonClient.getBlockingQueue("task");
         redissonDelayedQueue = redissonClient.getDelayedQueue(redissonBlockingQueue);
     }
+
+    public void put(Task task) {
+        redissonDelayedQueue.offer(task, 10, TimeUnit.SECONDS);
+    }
+
+    public void remove(Task task) {
+        redissonDelayedQueue.remove();
+    }
+
+    public Task take() throws InterruptedException {
+        return redissonBlockingQueue.take();
+    }
+
 
     /** delayqueue 执行
      * local expiredValues = redis.call('zrangebyscore',
@@ -66,19 +81,4 @@ public class DelayQueueService {
      *     channel 发布timeout
      * @param task
      */
-    public void put(Task task) {
-        redissonDelayedQueue.offer(task, 2000, TimeUnit.SECONDS);
-    }
-
-    public void remove(Task task) {
-        redissonDelayedQueue.remove();
-    }
-
-    public Task take() throws InterruptedException {
-        return redissonBlockingQueue.take();
-    }
-
-    class Task {
-        private String item;
-    }
 }

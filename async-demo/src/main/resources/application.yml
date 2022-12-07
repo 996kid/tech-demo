@@ -11,6 +11,8 @@ spring:
   redis:
     host: localhost
     port: 6379
+#    database: 5
+#    password: yunkc321#
   datasource:
     platform: mysql
     hikari:

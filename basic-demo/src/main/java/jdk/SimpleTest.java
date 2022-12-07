@@ -1,5 +1,7 @@
 package jdk;
 
+import lombok.Data;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -57,17 +59,39 @@ public class SimpleTest {
 
 //        Lock lock = new ReentrantLock();
 
-        String a = "hello world!";
-        System.out.println(a.substring(a.length() - 3));
+//        String a = "hello world!";
+//        System.out.println(a.substring(a.length() - 3));
+//
+//
+//        // Map
+//        Map map1 = new ConcurrentHashMap<>();
+//        Map map2 = new ConcurrentSkipListMap<>();
+//        Map map3 = new HashMap();
+//        Map map4 = new TreeMap();
+//        Map map5 = new Hashtable();
+//        TreeSet treeSet = new TreeSet();
+        User user = new User();
+        user.setName("111");
+        Page<User> page = new Page();
+        page.setObj(user);
+        change(page);
+        System.out.println(page);
+    }
+
+    private static void change(Page<User> page) {
+        User user = page.getObj();
+        user.setName("2222");
+    }
 
 
-        // Map
-        Map map1 = new ConcurrentHashMap<>();
-        Map map2 = new ConcurrentSkipListMap<>();
-        Map map3 = new HashMap();
-        Map map4 = new TreeMap();
-        Map map5 = new Hashtable();
-        TreeSet treeSet = new TreeSet();
+    @Data
+    static class Page<T> {
+        T obj;
+    }
+
+    @Data
+    static class User {
+        String name;
     }
 
 }

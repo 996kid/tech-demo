@@ -1,11 +1,12 @@
 package com.eastwood.redisson;
 
+import org.redisson.Redisson;
 import org.redisson.api.RScheduledExecutorService;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,7 +28,7 @@ public class RScheduledExecutorServiceTest {
 //    }
 
     public void publishTask(Runnable runnable) {
-        rScheduledExecutorService = redissonClient.getExecutorService("rScheduledExecutor");
-        rScheduledExecutorService.schedule(runnable, 10, TimeUnit.SECONDS);
+        rScheduledExecutorService = redissonClient.getExecutorService("se");
+        rScheduledExecutorService.schedule(runnable, 5, TimeUnit.SECONDS);
     }
 }
