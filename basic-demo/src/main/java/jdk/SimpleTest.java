@@ -70,12 +70,18 @@ public class SimpleTest {
 //        Map map4 = new TreeMap();
 //        Map map5 = new Hashtable();
 //        TreeSet treeSet = new TreeSet();
-        User user = new User();
-        user.setName("111");
-        Page<User> page = new Page();
-        page.setObj(user);
-        change(page);
-        System.out.println(page);
+
+
+
+//        User user = new User();
+//        user.setName("111");
+//        Page<User> page = new Page();
+//        page.setObj(user);
+//        change(page);
+//        System.out.println(page);
+
+        Integer i = new Integer(4);
+        System.out.println(i.equals(4));
     }
 
     private static void change(Page<User> page) {

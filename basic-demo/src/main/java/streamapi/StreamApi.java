@@ -82,5 +82,14 @@ public class StreamApi {
                 .sorted()
                 .collect(Collectors.toList());
         System.out.println(listSorted);
+
+        Map<Person, Integer> map = new HashMap<>();
+
+        // tomap
+        personList.stream().collect(Collectors.toMap(Person::getAge, Person::getName));
+        personList.stream().collect(Collectors.toMap(Person::getAge, i -> i));
+
+        //
+        personList.stream().collect(Collectors.toMap(i -> i, map::get));
     }
 }
