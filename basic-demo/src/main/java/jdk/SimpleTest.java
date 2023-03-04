@@ -2,6 +2,8 @@ package jdk;
 
 import lombok.Data;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -15,7 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class SimpleTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 //        int a, b;
 //        a = b = 6;
 //        System.out.println(a + "" + b);
@@ -80,8 +82,20 @@ public class SimpleTest {
 //        change(page);
 //        System.out.println(page);
 
-        Integer i = new Integer(4);
-        System.out.println(i.equals(4));
+//        Integer i = new Integer(4);
+//        System.out.println(i.equals(4));
+
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY,0);
+//        calendar.set(Calendar.MINUTE,0);
+//        calendar.set(Calendar.SECOND,0);
+//        calendar.add(Calendar.DAY_OF_MONTH,-1);
+//        System.out.println(format.format(calendar.getTime()));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(simpleDateFormat.parse("2023-02-27"));
+
     }
 
     private static void change(Page<User> page) {

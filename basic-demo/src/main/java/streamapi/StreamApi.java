@@ -1,6 +1,8 @@
 package streamapi;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,6 +68,30 @@ public class StreamApi {
         personList.add(new Person("小梅",20,"中国",'F'));
         personList.add(new Person("何雪",21,"中国",'F'));
         personList.add(new Person("李康",22,"中国",'M'));
+
+        personList.stream().collect(Collectors.toMap((Function<Person, Object>) person -> person.getName(),
+                person -> person.getCountry(), new BinaryOperator<Object>() {
+
+            @Override
+            public Object apply(Object o, Object o2) {
+                return o;
+            }
+        }));
+
+
+        personList.stream().map(new Function<Person, Object>() {
+
+            @Override
+            public Object apply(Person person) {
+                return null;
+            }
+        }).map(new Function<Object, Object>() {
+
+            @Override
+            public Object apply(Object o) {
+                return null;
+            }
+        });
 
         List<Integer> listAge = personList.stream()
                 .filter(person -> person.getAge() > 18)
