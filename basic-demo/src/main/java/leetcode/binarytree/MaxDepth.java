@@ -21,28 +21,14 @@ package leetcode.binarytree;
 //
 //说明: 叶子节点是指没有子节点的节点。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 1 + max(LeftSub, rightSub)  深度优先
+//todo  广度优先  循环遍历每一层直到 有一层没有节点
 public class MaxDepth {
     public int maxDepth(TreeNode root) {
-        return 0;
+        if (root == null) return 0;
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+        return Math.max(leftDepth, rightDepth) + 1;
     }
 
     public static void main(String[] args) {
