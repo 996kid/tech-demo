@@ -96,6 +96,10 @@ public class StreamApi {
         List<Integer> listAge = personList.stream()
                 .filter(person -> person.getAge() > 18)
                 .map(Person::getAge).collect(Collectors.toList());
+        StringBuilder stringBuilder = new StringBuilder();
+        personList.stream()
+                .filter(person -> person.getAge() > 18)
+                .map(person -> person.getAge()).forEach(stringBuilder::append);
         System.out.println(listAge);
 
         List<Person> listPerson = personList.stream()
@@ -111,11 +115,16 @@ public class StreamApi {
 
         Map<Person, Integer> map = new HashMap<>();
 
-        // tomap
-        personList.stream().collect(Collectors.toMap(Person::getAge, Person::getName));
+        // to map
+        personList.stream().collect(Collectors.toMap(StreamApi::test, Person::getName, (s, s2) -> s));
         personList.stream().collect(Collectors.toMap(Person::getAge, i -> i));
+        personList.stream().collect(Collectors.toMap(Person::getAge, map::get, (s, s2) -> s));
 
         //
         personList.stream().collect(Collectors.toMap(i -> i, map::get));
+    }
+
+    static char test(Person person) {
+        return person.getSex();
     }
 }
