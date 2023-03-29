@@ -23,7 +23,7 @@ public class InvokeDynamicTest {
             }
         };
 
-        dynamicTest.lambda(s -> {return "hello";});
+        dynamicTest.lambda(s -> "hello");
     }
 }
 
