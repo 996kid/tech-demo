@@ -2,6 +2,7 @@ package streamapi;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -100,6 +101,10 @@ public class StreamApi {
         personList.stream()
                 .filter(person -> person.getAge() > 18)
                 .map(person -> person.getAge()).forEach(stringBuilder::append);
+
+        personList.stream()
+                .filter(person -> person.getAge() > 18)
+                .map(person -> person.getAge()).forEach(integer -> stringBuilder.append(integer));
         System.out.println(listAge);
 
         List<Person> listPerson = personList.stream()

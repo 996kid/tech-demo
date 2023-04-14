@@ -1,4 +1,4 @@
-package com.eastwood.design.metrics.domain.storage;
+package com.eastwood.design.metrics.domain.refactor.storage;
 
 import com.eastwood.design.metrics.domain.RequestMetrics;
 

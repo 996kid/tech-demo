@@ -12,11 +12,16 @@ import java.util.List;
 public class Aggregator {
 
     public static RequestStat aggregate(List<RequestMetrics> requestInfos, long durationInMillis) {
+        // 最大响应时间
         double maxRespTime = Double.MIN_VALUE;
+        // 最小响应时间
         double minRespTime = Double.MAX_VALUE;
+        // 平均响应时间
         double avgRespTime = -1;
+        // p999
         double p999RespTime = -1;
         double p99RespTime = -1;
+        // 总响应时间
         double sumRespTime = 0;
         long count = 0;
         for (RequestMetrics requestInfo : requestInfos) {

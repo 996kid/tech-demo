@@ -2,6 +2,7 @@ package com.eastwood.design.metrics.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * @ClassName: RequestMetrics
@@ -11,6 +12,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@Accessors(chain = true)
 public class RequestMetrics {
 
     private String api;
