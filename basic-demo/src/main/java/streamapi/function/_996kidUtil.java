@@ -39,7 +39,17 @@ public class _996kidUtil {
     public static void main(String[] args) {
 
         // 模板方法模式
+        _996kidUtil.testFunction(new SimpleFunction() {
+            @Override
+            public void print(Object o) {
+                System.out.println(o);
+            }
+        });
+
         _996kidUtil.testFunction(System.out::println);
+
+
+
 
         _996kidUtil.isTrue(true).throwMessage("业务异常");
 

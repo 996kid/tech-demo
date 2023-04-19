@@ -31,11 +31,8 @@ public class JavaBasedDelayQueueDemo {
 //            }
 //        }, 3000);
 
-        scheduledExecutorService.schedule(new Runnable() {
-            @Override
-            public void run() {
+        scheduledExecutorService.schedule(() -> {
 
-            }
         }, 1000, TimeUnit.MILLISECONDS);
     }
     static class DelayedItem implements Delayed {

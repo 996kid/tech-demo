@@ -1,6 +1,7 @@
 package com.eastwood.design.pattern.factory;
 
 import com.eastwood.design.pattern.factory.factorymethod.RuleConfigParserFactoryMap;
+import com.eastwood.design.pattern.factory.simplefactory.EnumFactory;
 import com.eastwood.design.pattern.factory.simplefactory.RuleConfigParserFactory;
 
 public class RuleConfigSource {
@@ -56,6 +57,21 @@ public class RuleConfigSource {
     RuleConfig ruleConfig = parser.parse(configText);
     return ruleConfig;
   }
+
+  /**
+   * 枚举实现的简单工厂
+   * @param ruleConfigFilePath
+   * @return
+   */
+  public RuleConfig load3(String ruleConfigFilePath) {
+    String ruleConfigFileExtension = getFileExtension(ruleConfigFilePath);
+    IRuleConfigParser parser = EnumFactory.getByType(ruleConfigFileExtension);
+    String configText = "";
+    //从ruleConfigFilePath文件中读取配置文本到configText中
+    RuleConfig ruleConfig = parser.parse(configText);
+    return ruleConfig;
+  }
+
 
   private String getFileExtension(String filePath) {
     //...解析文件名获取扩展名，比如rule.json，返回json

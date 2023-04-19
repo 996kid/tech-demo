@@ -93,9 +93,16 @@ public class SimpleTest {
 //        calendar.add(Calendar.DAY_OF_MONTH,-1);
 //        System.out.println(format.format(calendar.getTime()));
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(simpleDateFormat.parse("2023-02-27"));
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        System.out.println(simpleDateFormat.parse("2023-02-27"));
 
+
+        Set<Integer> set = new LinkedHashSet<>();
+        set.add(5);
+        set.add(7);
+        set.add(2);
+        set.add(4);
+        System.out.println(set);
     }
 
     private static void change(Page<User> page) {

@@ -1,5 +1,6 @@
 package com.eastwood.threadpool;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -71,7 +72,7 @@ class MyCallable implements Callable<String> {
     }
 }
 
-class MyRunnable implements Runnable {
+class MyRunnable implements Runnable, Serializable {
 
     // 状态 未运行 已运行
     private int status;

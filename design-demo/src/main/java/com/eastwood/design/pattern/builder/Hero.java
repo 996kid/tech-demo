@@ -1,4 +1,4 @@
-package designpatterns;
+package com.eastwood.design.pattern.builder;
 
 /** builder 模式
  * @author 996kid@gmail.com
@@ -6,11 +6,6 @@ package designpatterns;
  * @Date 2022/5/9 23:31
  */
 public class Hero {
-
-    public static void main(String[] args) {
-        Hero mage = new Hero.Builder("Profession.MAGE", "Riobard").
-                withHairColor("HairColor.BLACK").withWeapon("Weapon.DAGGER").build();
-    }
 
     private final String profession;
     private final String name;
@@ -29,19 +24,24 @@ public class Hero {
     }
 
     public static class Builder {
-        private final String profession;
-        private final String name;
+        private String profession;
+        private String name;
         private String hairType;
         private String hairColor;
         private String armor;
         private String weapon;
 
-        public Builder(String profession, String name) {
-            if (profession == null || name == null) {
-                throw new IllegalArgumentException("profession and name can not be null");
-            }
+        public Builder() {
+        }
+
+        public Builder withProfession(String profession) {
             this.profession = profession;
+            return this;
+        }
+
+        public Builder withName(String name) {
             this.name = name;
+            return this;
         }
 
         public Builder withHairType(String hairType) {
@@ -65,6 +65,9 @@ public class Hero {
         }
 
         public Hero build() {
+            /**
+             * do some check
+             */
             return new Hero(this);
         }
     }
