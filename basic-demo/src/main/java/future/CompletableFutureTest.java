@@ -1,6 +1,7 @@
 package future;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
 /**
  * @author yyh
@@ -11,6 +12,13 @@ public class CompletableFutureTest {
     public static void main(String[] args) throws Exception {
         // 创建异步执行任务:
         CompletableFuture<Double> cf = CompletableFuture.supplyAsync(CompletableFutureTest::fetchPrice);
+        cf.thenApply(new Function<Double, Object>() {
+
+            @Override
+            public Object apply(Double aDouble) {
+                return null;
+            }
+        });
         CompletableFuture cf2 = CompletableFuture.runAsync(() -> {
             System.out.println("等我干完");
         });

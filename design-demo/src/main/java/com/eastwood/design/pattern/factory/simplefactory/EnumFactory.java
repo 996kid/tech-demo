@@ -13,6 +13,11 @@ import java.util.Arrays;
  */
 public enum EnumFactory implements IRuleConfigParser {
 
+    /**
+     * 枚举类的实质
+     *  JSON 是枚举类EnumFactory的一个实例
+     *
+     */
     JSON {
         @Override
         public RuleConfig parse(String configText) {

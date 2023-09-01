@@ -27,6 +27,7 @@ public class RedissonBlockingQueue {
     public static void main(String[] args) throws InterruptedException {
         RBlockingQueue rBlockingQueue = redissonClient.getBlockingQueue("bq");
         RBucket<Object> bucket = redissonClient.getBucket("111");
+        bucket.get();
         RDelayedQueue rDelayedQueue = redissonClient.getDelayedQueue(rBlockingQueue);
         rDelayedQueue.offer(new Object(), 1, TimeUnit.SECONDS);
         Object obj = rBlockingQueue.take();

@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.4.RELEASE</version>
+        <version>2.7.15</version>
     </parent>
 
     <modules>
@@ -33,20 +33,20 @@
         <module>transaction-demo</module>
     </modules>
 
-    <distributionManagement>
-        <repository>
-            <id>kid-repository-release</id>
-            <url>
-                http://106.13.126.196:8081/repository/maven-releases/
-            </url>
-        </repository>
-        <snapshotRepository>
-            <id>kid-repository-snapshots</id>
-            <url>
-                http://106.13.126.196:8081/repository/maven-snapshots/
-            </url>
-        </snapshotRepository>
-    </distributionManagement>
+<!--    <distributionManagement>-->
+<!--        <repository>-->
+<!--            <id>kid-repository-release</id>-->
+<!--            <url>-->
+<!--                http://106.13.126.196:8081/repository/maven-releases/-->
+<!--            </url>-->
+<!--        </repository>-->
+<!--        <snapshotRepository>-->
+<!--            <id>kid-repository-snapshots</id>-->
+<!--            <url>-->
+<!--                http://106.13.126.196:8081/repository/maven-snapshots/-->
+<!--            </url>-->
+<!--        </snapshotRepository>-->
+<!--    </distributionManagement>-->
 
 
     <build>
