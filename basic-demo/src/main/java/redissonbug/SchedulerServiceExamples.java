@@ -1,28 +1,12 @@
 package redissonbug;
 
-import io.netty.util.Timeout;
-import io.netty.util.TimerTask;
-import io.netty.util.concurrent.DefaultPromise;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.FutureListener;
-import io.netty.util.concurrent.Promise;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.RedissonNode;
-import org.redisson.api.RFuture;
-import org.redisson.api.RMap;
 import org.redisson.api.RScheduledExecutorService;
 import org.redisson.api.RedissonClient;
-import org.redisson.client.codec.StringCodec;
-import org.redisson.codec.CompositeCodec;
 import org.redisson.config.Config;
 import org.redisson.config.RedissonNodeConfig;
-import org.redisson.executor.RemoteExecutorService;
-import org.redisson.misc.RPromise;
-import org.redisson.misc.RedissonPromise;
-import org.redisson.remote.RemoteServiceCancelRequest;
-import org.redisson.remote.RemoteServiceCancelResponse;
-import org.redisson.remote.RequestId;
 
 import java.io.Serializable;
 import java.util.Collections;
