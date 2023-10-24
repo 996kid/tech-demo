@@ -11,10 +11,10 @@ import java.util.function.Consumer;
 
 public class SleepPileline {
 
-    private final Consumer<Me> consumers;
+    private final Consumer<Me> firstConsumer;
 
     public SleepPileline() {
-        consumers = SleepPileline.start(TakeOffConsumer.INSTANCE)
+        firstConsumer = SleepPileline.start(TakeOffConsumer.INSTANCE)
                 .andThen(CloseEyesConsumer.INSTANCE)
                 .andThen(FinalGetConsumer.INSTANCE)
                 .andThen(last())
@@ -34,6 +34,6 @@ public class SleepPileline {
 
 
     public static void main(String[] args) {
-        new SleepPileline().consumers.accept(new Me("sleepy"));
+        new SleepPileline().firstConsumer.accept(new Me("sleepy"));
     }
 }
