@@ -6,8 +6,8 @@ import java.util.Map;
 public class ContainsNearbyDuplicate {
 
     public static void main(String[] args) {
-        int[] nums = {1,0,1,1};
-        System.out.println(containsNearbyDuplicate(nums, 1));
+        int[] nums = {1,2,3,1};
+        System.out.println(containsNearbyDuplicate1(nums, 3));
     }
 
     /**
@@ -53,6 +53,35 @@ public class ContainsNearbyDuplicate {
      * @return
      */
     public static boolean containsNearbyDuplicate1(int[] nums, int k) {
+        // 维护滑动窗口中的元素 滑动窗口size <= k + 1 超过 K + 1时需要移除第一个元素
+        // nums[i] -> 1
+        Map<Integer, Integer> elements = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            // 维护size 为 k 的滑动窗口
+            if (i > k) {
+                elements.remove(nums[i - k -1]);
+            }
+            // 滑动窗口中是否有重复元素
+
+            if (elements.put(nums[i], 1) != null) {
+                return true;
+            }
+        }
         return false;
+
+        /**
+         * Set<Integer> set = new HashSet<Integer>();
+         *         int length = nums.length;
+         *         for (int i = 0; i < length; i++) {
+         *             if (i > k) {
+         *                 set.remove(nums[i - k - 1]);
+         *             }
+         *             if (!set.add(nums[i])) {
+         *                 return true;
+         *             }
+         *         }
+         *         return false;
+         *
+         */
     }
 }
