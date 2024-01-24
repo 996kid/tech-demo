@@ -11,6 +11,7 @@ import java.lang.reflect.Proxy;
  */
 public class TestJdkProxy implements InvocationHandler {
 
+
     public static void main(String[] args) {
         GrettingService grettingService = (GrettingService) Proxy.newProxyInstance(TestJdkProxy.class.getClassLoader(),
                  new Class[] {GrettingService.class},

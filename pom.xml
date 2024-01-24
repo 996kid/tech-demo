@@ -29,7 +29,6 @@
         <module>reactor-demo</module>
         <module>netty-demo</module>
         <module>rocketmq-demo</module>
-        <module>websocket-demo</module>
         <module>transaction-demo</module>
     </modules>
 

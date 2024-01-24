@@ -1,6 +1,7 @@
 package com.eastwood.async;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
  * @date 2019/12/31
  */
 @Slf4j
+@Mapper
 public class BaseController {
 
     static class A {

@@ -17,10 +17,10 @@ public class BubbleSortTest {
      * @param array
      */
     private static void bubbleSort(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 1; j < array.length - i; j++) {
-                if (array[j - 1] > array[j]) {
-                    swap(array, j - 1, j);
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length - i - 1; j++) {
+                if (array[j + 1] > array[j]) {
+                    swap(array, j + 1, j);
                 }
             }
         }
@@ -34,7 +34,7 @@ public class BubbleSortTest {
 
     private static void print(int[] array) {
         for (int i : array) {
-            System.out.print(i + ",");
+            System.out.print(i + "\t");
         }
     }
 }

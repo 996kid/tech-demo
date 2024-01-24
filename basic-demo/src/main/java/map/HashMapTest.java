@@ -15,7 +15,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class HashMapTest {
 
     public static void main(String[] args) {
+        byte a = 8;
+        int b = a;
+        int c = a & 0xff;
+
+
         Map map = new HashMap<>();
+        map.put(null, null);
 
         int i = 1 << 4;
         int j = 1 << 16;
@@ -24,6 +30,7 @@ public class HashMapTest {
         System.out.println(j);
 
         ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
+        concurrentHashMap.put(null, null);
 //
 //        Map hashTable = new Hashtable();
 //

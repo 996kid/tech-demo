@@ -6,6 +6,7 @@ import com.eastwood.redisson.delayqueue.DelayQueueService;
 import com.eastwood.redisson.delayqueue.Task;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,9 @@ public class RedissonController {
 //        farther.setName("kid");
 //        farther.setSon(son);
 //        redissonClient.getBucket("test").set(farther);
+
+        RBloomFilter<Object> test = redissonClient.getBloomFilter("test");
+        test.tryInit(1000000L, 0.03);
         return "success";
     }
 

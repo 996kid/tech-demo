@@ -16,5 +16,7 @@ public class BuilderTest {
      */
     public static void main(String[] args) {
         Hero hero = new Hero.Builder().withProfession("warrior").build();
+        // 打印结果：Hero{profession='warrior', name='null', hairType='null', hairColor='null', armor='null', weapon='null'}
+        System.out.println(hero);
     }
 }

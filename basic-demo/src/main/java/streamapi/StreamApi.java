@@ -27,9 +27,6 @@ public class StreamApi {
         //filter a stream of string[], and return a string[]?
 
         temp.flatMap(x -> Arrays.stream(x));
-        Stream<String[]> stream = temp.filter(x -> "a".equals(x.toString()));
-
-        stream.forEach(System.out::println);
     }
 
     static void test2() {
