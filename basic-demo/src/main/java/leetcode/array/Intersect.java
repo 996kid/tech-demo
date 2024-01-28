@@ -54,7 +54,14 @@ public class Intersect {
         return r.stream().mapToInt(value -> value).toArray();
     }
 
+    /**
+     * hash 表计数
+     * @param nums1
+     * @param nums2
+     * @return
+     */
     public int[] intersect1(int[] nums1, int[] nums2) {
+
         return null;
     }
 }
