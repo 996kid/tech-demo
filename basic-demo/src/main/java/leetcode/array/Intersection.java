@@ -50,4 +50,32 @@ public class Intersection {
         }
         return r.stream().mapToInt(value -> (Integer) value).toArray();
     }
+
+    /**
+     * 双指针
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static int[] intersection1(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+
+        int i = 0;
+        int j = 0;
+
+        Set<Integer> r = new HashSet<>();
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] == nums2[j]) {
+                r.add(nums1[i]);
+                i++;
+                j++;
+            } else if (nums1[i] > nums2[j]) {
+                j++;
+            } else {
+                i++;
+            }
+        }
+        return r.stream().mapToInt(value -> value).toArray();
+    }
 }
