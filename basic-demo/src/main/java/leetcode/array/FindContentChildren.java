@@ -77,21 +77,10 @@ public class FindContentChildren {
      *  ，其中 1≤i<m，1≤j<n。
      *
      * 假设在对前 i−1 个孩子分配饼干之后，可以满足第 i 个孩子的胃口的最小的饼干是第 j 块饼干，
-     * 即 sj是剩下的饼干中满足 gi≤s
-     * i
-     * ​
-     *  ≤s
-     * j
-     * ​
-     *   的最小值，最优解是将第 jjj 块饼干分配给第 iii 个孩子。如果不这样分配，考虑如下两种情形：
+     * 即 sj是剩下的饼干中满足 gi≤si
+     *   的最小值，最优解是将第 j 块饼干分配给第 i 个孩子。如果不这样分配，考虑如下两种情形：
      *
-     * 如果 i<mi<mi<m 且 gi+1≤sjg_{i+1} \le s_jg
-     * i+1
-     * ​
-     *  ≤s
-     * j
-     * ​
-     *   也成立，则如果将第 jjj 块饼干分配给第 i+1i+1i+1 个孩子，且还有剩余的饼干，则可以将第 j+1j+1j+1 块饼干分配给第 iii 个孩子，分配的结果不会让更多的孩子被满足；
+     * 如果 i<m 且 gi+1≤sj也成立，则如果将第 jjj 块饼干分配给第 i+1i+1i+1 个孩子，且还有剩余的饼干，则可以将第 j+1j+1j+1 块饼干分配给第 iii 个孩子，分配的结果不会让更多的孩子被满足；
      *
      * 如果 j<nj<nj<n，则如果将第 j+1j+1j+1 块饼干分配给第 iii 个孩子，当 gi+1≤sjg_{i+1} \le s_jg
      * i+1
@@ -115,6 +104,8 @@ public class FindContentChildren {
      *
      */
     public int findContentChildren1(int[] g, int[] s) {
+
+        // g 胃口, s 尺寸
         Arrays.sort(g);
         Arrays.sort(s);
         int m = g.length, n = s.length;
