@@ -56,12 +56,36 @@ public class Intersect {
 
     /**
      * hash 表计数
+     *     - 遍历其中一个数组 生成Hash  nums1[i] -> counter
+     *     - 再遍历另外一个数组 判断是否在Hash中存在
+     *          - 存在再判断counter 数量是否大于0 是则加入 否则继续
+     *          - 不存在继续
+     *
+     *          输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+     *          [1,2,2,1] [2,2]
      * @param nums1
      * @param nums2
      * @return
      */
     public int[] intersect1(int[] nums1, int[] nums2) {
-
-        return null;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums1.length; i++) {
+            if (map.get(nums1[i]) != null) {
+                map.put(nums1[i], map.get(nums1[i]) + 1);
+            } else {
+                map.put(nums1[i], 1);
+            }
+        }
+        List<Integer> r = new ArrayList<>();
+        for (int i = 0; i < nums2.length; i++) {
+            if (map.get(nums2[i]) != null) {
+                Integer counter = map.get(nums2[i]);
+                if (counter >= 1) {
+                    r.add(nums2[i]);
+                    map.put(nums2[i], map.get(nums2[i]) - 1);
+                }
+            }
+        }
+        return r.stream().mapToInt(Integer::intValue).toArray();
     }
 }
