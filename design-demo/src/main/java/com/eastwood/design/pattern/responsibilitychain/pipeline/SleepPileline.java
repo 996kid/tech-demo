@@ -1,5 +1,7 @@
 package com.eastwood.design.pattern.responsibilitychain.pipeline;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -14,6 +16,16 @@ public class SleepPileline {
     private final Consumer<Me> firstConsumer;
 
     public SleepPileline() {
+        // 返回了一个Consumer
+        /**
+         * (T t) -> {
+         * accept(t);
+         * after.accept(t);
+         * }
+         *
+         * 这样的一个方法调用序列
+         * TakeOffConsumer.accept() --> CloseEyesConsumer.accept() --> FinalGetConsumer.accept() --> last
+         */
         firstConsumer = SleepPileline.start(TakeOffConsumer.INSTANCE)
                 .andThen(CloseEyesConsumer.INSTANCE)
                 .andThen(FinalGetConsumer.INSTANCE)
@@ -35,5 +47,22 @@ public class SleepPileline {
 
     public static void main(String[] args) {
         new SleepPileline().firstConsumer.accept(new Me("sleepy"));
+
+        List<Integer> list = new ArrayList<>();
+        list.forEach(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) {
+                System.out.println(integer);
+            }
+        });
+        
+        for (Integer i : list) {
+            new Consumer<Integer>() {
+                @Override
+                public void accept(Integer integer) {
+                    System.out.println(integer);
+                }
+            }.accept(i);
+        }
     }
 }
