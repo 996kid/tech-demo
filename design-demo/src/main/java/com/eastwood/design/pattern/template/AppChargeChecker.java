@@ -8,6 +8,11 @@ package com.eastwood.design.pattern.template;
  */
 public class AppChargeChecker extends AbstractChargeChecker {
 
+    public AppChargeChecker() {
+        A a = new A("App");
+        super.initA(a);
+    }
+
     @Override
     protected void stepC() {
         System.out.println("app stepC");

@@ -7,6 +7,13 @@ package com.eastwood.design.pattern.template;
  * @Date: 2023/4/19 10:11
  */
 public class CardChargeChecker extends AbstractChargeChecker {
+
+    public CardChargeChecker() {
+        A a = new A("Card");
+        super.initA(a);
+    }
+
+
     @Override
     protected void stepC() {
         System.out.println("card stepC");
