@@ -47,19 +47,24 @@ public class NextGreaterElement {
     }
 
     /**
-     *
+     * 单调递增栈（栈顶到栈底）范式
      * @param nums1
      * @param nums2
      * @return
      */
     public int[] nextGreaterElement1(int[] nums1, int[] nums2) {
+        // {2,5,3,6,8,4,7,1}
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         Deque<Integer> stack = new ArrayDeque<Integer>();
+        // 从后往前遍历数组
         for (int i = nums2.length - 1; i >= 0; --i) {
             int num = nums2[i];
+            // 将比当前小的数出栈，直到一个比当前数大的数则停止循环
+            // 保证留在栈里的都是比当前数大的数，且是栈顶到栈底是递增的
             while (!stack.isEmpty() && num >= stack.peek()) {
                 stack.pop();
             }
+            // 栈顶元素比当前元素大，根据栈的特性知道栈顶元素是右边第一个较大的
             map.put(num, stack.isEmpty() ? -1 : stack.peek());
             stack.push(num);
         }
