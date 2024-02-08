@@ -92,7 +92,7 @@ public class IslandPerimeter {
     }
 
     /**
-     * 深度优先
+     * 深度优先 deep first search
      * @param grid
      * @return
      */
