@@ -47,6 +47,14 @@ public class FindLHS {
         int begin = 0;
         int res = 0;
         // 移动结尾指针
+        /**
+         * 滑动窗口
+         *  1. 分别初始化开始结尾指针为0
+         *  2. 开始移动结尾指针
+         *  3. 判断条件是否满足 在这里是开始结尾指针所指的元素差值是否大于1
+         *      -- 大于1则移动开始指针
+         *      -- 小于等于1则移动结尾指针, 仅等于1时记录和谐子序列的长度 如果比之前的值大则更新最长子序列为当前值
+         */
         for (int end = 0; end < nums.length; end++) {
             // 如果遍历的数和开头的数差值大于1就移动开始指针
             while (nums[end] - nums[begin] > 1) {
@@ -59,10 +67,34 @@ public class FindLHS {
         return res;
     }
 
+    /**
+     * hash
+     * @param nums
+     * @return
+     */
+    public static int findLHS2(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+
+        int r = 0;
+        //遍历map 找到x及x+1的出现次数
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (map.containsKey(entry.getKey() + 1)) {
+                r = Math.max(map.getOrDefault(entry.getKey() + 1, 0) + entry.getValue(), r);
+            }
+        }
+        return r;
+    }
 
 
 
-
+    /**
+     * 不对
+     * @param nums
+     * @return
+     */
     public static int findLHS(int[] nums) {
         List<Integer> window = new ArrayList<>();
         Set<Integer> set = new HashSet<>();
