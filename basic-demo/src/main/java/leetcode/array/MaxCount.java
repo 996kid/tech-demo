@@ -28,4 +28,14 @@ public class MaxCount {
 
         return 0;
     }
+
+    public int maxCount1(int m, int n, int[][] ops) {
+        int i = m;
+        int j = n;
+        for (int[] op : ops) {
+            i = Math.min(i, op[0]);
+            j = Math.min(j, op[1]);
+        }
+        return i * j;
+    }
 }
