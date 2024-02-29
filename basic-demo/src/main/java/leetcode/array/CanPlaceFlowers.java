@@ -27,14 +27,92 @@ public class CanPlaceFlowers {
 
     /**
      * 最大能种多少花？
-     *
-     * 
+     * 001000100001000001000   000100
      *
      * @param flowerbed
      * @param n
      * @return
      */
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
-        return false;
+        /**
+         * 1. j - i >= 4
+         * 2. 种植范围 [i+2, j-2]
+         * 3. j - i - 3
+         *     - 奇数  最大可以种植的花  (j - i - 3) / 2 + 1
+         *     - 偶数  最大可以种植的花               (j - i - 3) / 2
+         *
+         *
+         *     [1,0,0,0,0,1]
+         *     [0,0,1,0,1] 0
+         *     [0,0,0,1,0,1] 1
+         *     [0,0,0,0,1,0,1] 2
+         *     [0,0,0,0,0,1,0,1] 3
+         *     [0,0,0,0,0,0,1,0,1]
+         *
+         *     [1,0,0,0,1,0,0]  7 - 4 - 3
+         *     [1,0,0,0,1,0,0,0]
+         *
+         *     [1,0]
+          * */
+        int prev = -1;
+        int max = 0;
+        for (int i = 0; i < flowerbed.length; i++) {
+            if (flowerbed[i] == 1) {
+                if (i - prev >= 3) {
+                    if (prev < 0) {
+                        max += (i - prev - 3) / 2 + 1;
+                    } else if ((i - prev - 3) % 2 == 0) {
+                        max += (i - prev - 3) / 2;
+                    } else {
+                        max += (i - prev - 3) / 2 + 1;
+                    }
+                }
+                prev = i;
+            }
+        }
+
+        if (flowerbed[flowerbed.length - 1] != 1) {
+            if (prev >= 0) {
+                int i = flowerbed.length - prev - 3;
+                if (i >= 0) {
+                    max += i / 2 + 1;
+                }
+            } else {
+                if (flowerbed.length % 2 == 0) {
+                    return flowerbed.length / 2 >= n;
+                } else {
+                    return (flowerbed.length / 2 + 1) >= n;
+                }
+            }
+        }
+        if (flowerbed.length == 1 && flowerbed[0] == 0 && n == 1) {
+            return true;
+        }
+        return max >= n;
     }
+
+    class Solution {
+        public boolean canPlaceFlowers(int[] flowerbed, int n) {
+            int count = 0;
+            int m = flowerbed.length;
+            int prev = -1;
+            for (int i = 0; i < m; i++) {
+                if (flowerbed[i] == 1) {
+                    if (prev < 0) {
+                        count += i / 2;
+                    } else {
+                        count += (i - prev - 2) / 2;
+                    }
+                    prev = i;
+                }
+            }
+            if (prev < 0) {
+                count += (m + 1) / 2;
+            } else {
+                count += (m - prev - 1) / 2;
+            }
+            return count >= n;
+        }
+    }
+
 }
