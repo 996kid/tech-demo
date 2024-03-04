@@ -33,7 +33,7 @@ public class MaximumProduct {
      */
     public static int maximumProduct(int[] nums) {
         Arrays.sort(nums);
-        
-        return 0;
+        int n = nums.length;
+        return Math.max(nums[0] * nums[1] * nums[n-1], nums[n-1] * nums[n-2] * nums[n-3]);
     }
 }
