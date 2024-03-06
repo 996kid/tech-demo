@@ -1,6 +1,7 @@
 package leetcode.array;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class FindMaxAverage {
                 sum += nums[i];
             } else {
                 // 窗口已达到最大值
-                BigDecimal t = new BigDecimal(sum).divide(new BigDecimal(k), 5, BigDecimal.ROUND_HALF_UP);
+                BigDecimal t = new BigDecimal(sum).divide(new BigDecimal(k), 5, RoundingMode.HALF_UP);
                 if (t.compareTo(avg) > 0) {
                     avg = t;
                 }
@@ -62,10 +63,27 @@ public class FindMaxAverage {
             }
         }
 
-        BigDecimal t = new BigDecimal(sum).divide(new BigDecimal(k), 5, BigDecimal.ROUND_HALF_UP);
+        BigDecimal t = new BigDecimal(sum).divide(new BigDecimal(k), 5, RoundingMode.HALF_UP);
         if (t.compareTo(avg) > 0) {
             avg = t;
         }
         return avg.doubleValue();
     }
+
+    class Solution {
+        public double findMaxAverage(int[] nums, int k) {
+            int sum = 0;
+            int n = nums.length;
+            for (int i = 0; i < k; i++) {
+                sum += nums[i];
+            }
+            int maxSum = sum;
+            for (int i = k; i < n; i++) {
+                sum = sum - nums[i - k] + nums[i];
+                maxSum = Math.max(maxSum, sum);
+            }
+            return 1.0 * maxSum / k;
+        }
+    }
+
 }
