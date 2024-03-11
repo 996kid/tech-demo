@@ -55,4 +55,9 @@ public class RedissonController {
     public Farther get() {
         return (Farther) redissonClient.getBucket("test").get();
     }
+
+    @GetMapping("/get")
+    public String test1() {
+        return "1";
+    }
 }
