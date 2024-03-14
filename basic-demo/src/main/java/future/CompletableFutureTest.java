@@ -3,6 +3,7 @@ package future;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 /**
@@ -12,6 +13,12 @@ import java.util.function.Function;
  */
 public class CompletableFutureTest {
     public static void main(String[] args) throws Exception {
+        CompletableFuture completableFuture = new CompletableFuture();
+        
+        completableFuture.complete("true");
+
+        completableFuture.get(10, TimeUnit.SECONDS);
+
         // 创建异步执行任务:
         CompletableFuture<Double> cf = CompletableFuture.supplyAsync(CompletableFutureTest::fetchPrice);
         cf.thenApply(new Function<Double, Object>() {
@@ -96,6 +103,12 @@ public class CompletableFutureTest {
             //根据result3、result4、result5组装最终result;
             return "result";
         });
+
+        CompletableFuture<Object> cf7 = CompletableFuture.anyOf(cf3, cf4, cf5);
+        cf7.thenApply(t -> {
+            cf4.join();
+            return cf3.join();
+        });
     }
 
     /**
@@ -117,27 +130,27 @@ public class CompletableFutureTest {
      *
      * 回调 -> completableFuture
      */
-   /* public static <T> CompletableFuture<T> toCompletableFuture(final OctoThriftCallback<?,T> callback , ThriftAsyncCall thriftCall) {
-        //新建一个未完成的CompletableFuture
-        CompletableFuture<T> resultFuture = new CompletableFuture<>();
-        //监听回调的完成，并且与CompletableFuture同步状态
-        callback.addObserver(new OctoObserver<T>() {
-            @Override
-            public void onSuccess(T t) {
-                resultFuture.complete(t);
-            }
-            @Override
-            public void onFailure(Throwable throwable) {
-                resultFuture.completeExceptionally(throwable);
-            }
-        });
-        if (thriftCall != null) {
-            try {
-                thriftCall.invoke();
-            } catch (Exception e) {
-                resultFuture.completeExceptionally(e);
-            }
-        }
-        return resultFuture;
-    }*/
+//    public static <T> CompletableFuture<T> toCompletableFuture(final OctoThriftCallback<?,T> callback , ThriftAsyncCall thriftCall) {
+//        //新建一个未完成的CompletableFuture
+//        CompletableFuture<T> resultFuture = new CompletableFuture<>();
+//        //监听回调的完成，并且与CompletableFuture同步状态
+//        callback.addObserver(new OctoObserver<T>() {
+//            @Override
+//            public void onSuccess(T t) {
+//                resultFuture.complete(t);
+//            }
+//            @Override
+//            public void onFailure(Throwable throwable) {
+//                resultFuture.completeExceptionally(throwable);
+//            }
+//        });
+//        if (thriftCall != null) {
+//            try {
+//                thriftCall.invoke();
+//            } catch (Exception e) {
+//                resultFuture.completeExceptionally(e);
+//            }
+//        }
+//        return resultFuture;
+//    }
 }

@@ -7,6 +7,7 @@ import com.eastwood.redisson.delayqueue.Task;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBloomFilter;
+import org.redisson.api.RSemaphore;
 import org.redisson.api.RedissonClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,7 @@ public class RedissonController {
 
     @GetMapping("/get")
     public String test1() {
+        RSemaphore semaphore = redissonClient.getSemaphore("mySemaphore");
         return "1";
     }
 }
