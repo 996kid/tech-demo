@@ -65,7 +65,11 @@ public class CalPoints {
                 sum += score;
                 list.set(i, score);
             } else if (operations[i].equals("D")) {
-                sum += Integer.parseInt(operations[i - 1]) * 2;
+                int score = list.get(i - 1) * 2;
+                sum += score;
+                list.set(i, score);
+            } else if (operations[i].equals("C")) {
+
             }
         }
         return 0;
