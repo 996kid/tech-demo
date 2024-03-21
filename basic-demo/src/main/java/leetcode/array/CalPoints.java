@@ -52,26 +52,34 @@ public class CalPoints {
      * @param args
      */
     public static void main(String[] args) {
-        
+        String[] s = {"5","2","C","D","+"};
+        System.out.println(calPoints(s));
     }
 
 
+    //["5","2","C","D","+"]
     public static int calPoints(String[] operations) {
+        // 求和
         int sum = 0;
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = new ArrayList<>(operations.length);
         for (int i = 0; i < operations.length; i++) {
             if (operations[i].equals("+")) {
-                int score = list.get(i - 1) + list.get(i - 2);
+                int score = list.get(list.size() - 1) + list.get(list.size() - 2);
                 sum += score;
-                list.set(i, score);
+                list.add(list.size(), score);
             } else if (operations[i].equals("D")) {
-                int score = list.get(i - 1) * 2;
+                int score = list.get(list.size() - 1) * 2;
                 sum += score;
-                list.set(i, score);
+                list.add(list.size(), score);
             } else if (operations[i].equals("C")) {
-
+                sum -= list.get(list.size() - 1);
+                list.remove(list.size() - 1);
+            } else {
+                int score = Integer.parseInt(operations[i]);
+                sum += score;
+                list.add(list.size(), score);
             }
         }
-        return 0;
+        return sum;
     }
 }

@@ -74,6 +74,11 @@ public class CompletableFutureTest {
         CompletableFuture<String> cf = new CompletableFuture<>();
         cf.complete("success");
 
+        // 没有返回结果
+        CompletableFuture.runAsync(() -> {
+
+        });
+
 
 
         CompletableFuture<String> cf3 = cf1.thenApply(result1 -> {
