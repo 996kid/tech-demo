@@ -1,5 +1,8 @@
 package leetcode.array;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author 996kid@gmail.com
  * @date 2024/3/21
@@ -30,10 +33,77 @@ public class FindShortestSubArray {
      * @param args
      */
     public static void main(String[] args) {
-
+        int[] a = {1,2,2,3,1};
+        System.out.println(findShortestSubArray1(a));
     }
 
-    public int findShortestSubArray(int[] nums) {
-        return 0;
+    public static int findShortestSubArray(int[] nums) {
+        /**
+         * 出现次数最多的数
+         * 记录每个数出现次数
+         * 每个数出现的开始位置和最后位置
+         * 最短子数组长度即为最后位置 - 开始位置 + 1
+         *
+         */
+        int max = 0;
+        //{1,2,2,3,1}
+        Map<Integer, Map<String, Integer>> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                Map<String, Integer> m = map.get(nums[i]);
+                max = Math.max(max, m.get("times") + 1);
+                m.put("times", m.get("times") + 1);
+                m.put("endIndex", i);
+                map.put(nums[i], m);
+            } else {
+                Map<String, Integer> m = new HashMap<>();
+                m.put("times", 1);
+                max = Math.max(max, 1);
+                m.put("startIndex", i);
+                m.put("endIndex", i);
+                map.put(nums[i], m);
+            }
+        }
+        int min = nums.length;
+        for (Map.Entry<Integer, Map<String, Integer>> entry : map.entrySet()) {
+            if (entry.getValue().get("times") == max) {
+                min = Math.min(min, entry.getValue().get("endIndex") - entry.getValue().get("startIndex") + 1);
+            }
+        }
+        return min;
+    }
+
+    public static int findShortestSubArray1(int[] nums) {
+        /**
+         * 出现次数最多的数
+         * 记录每个数出现次数
+         * 每个数出现的开始位置和最后位置
+         * 最短子数组长度即为最后位置 - 开始位置 + 1
+         *
+         */
+        int max = 0;
+        //{1,2,2,3,1}  0: times 1: beginIndex 2: endIndex
+        Map<Integer, int[]> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                int[] arr = map.get(nums[i]);
+                max = Math.max(max, arr[0] + 1);
+                arr[0]++;
+                arr[2] = i;
+                map.put(nums[i], arr);
+            } else {
+                int[] arr = new int[3];
+                arr[0] = 1;
+                arr[1] = arr[2] = i;
+                map.put(nums[i], arr);
+            }
+        }
+        int min = nums.length;
+        for (Map.Entry<Integer, int[]> entry : map.entrySet()) {
+            if (entry.getValue()[0] == max) {
+                min = Math.min(min, entry.getValue()[2] - entry.getValue()[1] + 1);
+            }
+        }
+        return min;
     }
 }
