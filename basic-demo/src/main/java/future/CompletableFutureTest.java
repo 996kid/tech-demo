@@ -19,6 +19,7 @@ public class CompletableFutureTest {
 
         completableFuture.get(10, TimeUnit.SECONDS);
 
+        completableFuture.join();
         // 创建异步执行任务:
         CompletableFuture<Double> cf = CompletableFuture.supplyAsync(CompletableFutureTest::fetchPrice);
         cf.thenApply(new Function<Double, Object>() {

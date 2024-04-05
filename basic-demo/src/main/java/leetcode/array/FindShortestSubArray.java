@@ -33,7 +33,7 @@ public class FindShortestSubArray {
      * @param args
      */
     public static void main(String[] args) {
-        int[] a = {1,2,2,3,1};
+        int[] a = {2,1};
         System.out.println(findShortestSubArray1(a));
     }
 
@@ -93,6 +93,7 @@ public class FindShortestSubArray {
                 map.put(nums[i], arr);
             } else {
                 int[] arr = new int[3];
+                max = Math.max(max, 1);
                 arr[0] = 1;
                 arr[1] = arr[2] = i;
                 map.put(nums[i], arr);
