@@ -2,6 +2,8 @@ package leetcode.array;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,31 +19,57 @@ import java.util.List;
  * 0 <= key <= 106
  * 最多调用 104 次 add、remove 和 contains
  *
- * 用数组 + 链表 设计 hash 表
+ * 用数组 + 链表 设计 hash集合
  */
 class MyHashSet {
 
-
-    private List<Integer> list;
+    // 链地址法
+    private LinkedList[] list;
 
     public MyHashSet() {
-        list = new ArrayList<>(16);
+        // 这里选择一个质数为数组的长度 尽可能避免hash冲突 ？？？
+        list = new LinkedList[679];
     }
     
     public void add(int key) {
-        int index = key % list.size();
-        if (list.get(index) != null) {
-
+        // 确定位置
+        int index = key % list.length;
+        // 是否冲突
+        if (list[index] != null) {
+            LinkedList linkedList = list[index];
+            linkedList.add(key);
         } else {
+            LinkedList newList = new LinkedList();
+            newList.add(key);
+            list[index] = newList;
         }
     }
     
     public void remove(int key) {
+        int index = key % list.length;
+        if (list[index] != null) {
+            LinkedList<Integer> linkedList = list[index];
+            Iterator iterator = linkedList.iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next().equals(key)) {
+                    iterator.remove();
+                }
+            }
+        }
     }
     
     public boolean contains(int key) {
+        int index = key % list.length;
+        if (list[index] != null) {
+            LinkedList linkedList = list[index];
+            return linkedList.contains(key);
+        }
         return false;
     }
+    /**
+     * ["MyHashSet","add","add","contains","contains","add","contains","remove","contains"]
+     * [[],[1],[2],[1],[3],[2],[2],[2],[2]]
+     */
 
     /**
      * 哈希函数：能够将集合中任意可能的元素映射到一个固定范围的整数值，并将该元素存储到整数值对应的地址上。
