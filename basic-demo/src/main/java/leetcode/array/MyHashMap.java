@@ -2,6 +2,7 @@ package leetcode.array;
 
 import lombok.Getter;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -39,12 +40,32 @@ public class MyHashMap {
     
     public int get(int key) {
         int index = hash(key);
-        // 遍历联表
-        return 0;
+        // 遍历链表
+        LinkedList linkedList = arr[index];
+        if (linkedList != null) {
+            Iterator<Node> iterator = linkedList.iterator();
+            while (iterator.hasNext()) {
+                Node node = iterator.next();
+                if (node.getKey() == key) {
+                    return node.getValue();
+                }
+            }
+        }
+        return -1;
     }
     
     public void remove(int key) {
-        //
+        int index = hash(key);
+        LinkedList linkedList = arr[index];
+        if (linkedList != null) {
+            Iterator<Node> iterator = linkedList.iterator();
+            while (iterator.hasNext()) {
+                Node node = iterator.next();
+                if (node.getKey() == key) {
+                    iterator.remove();
+                }
+            }
+        }
     }
 
     private int hash(int key) {
