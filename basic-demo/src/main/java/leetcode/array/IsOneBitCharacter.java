@@ -21,13 +21,42 @@ public class IsOneBitCharacter {
      * 输出：false
      * 解释：唯一的解码方式是将其解析为两比特字符和两比特字符。
      * 所以最后一个字符不是一比特字符。
+     *
      * @param args
      */
     public static void main(String[] args) {
-
+        System.out.println(isOneBitCharacter(new int[] {1, 1, 1, 1, 0}));
     }
 
-    public boolean isOneBitCharacter(int[] bits) {
+    public static boolean isOneBitCharacter(int[] bits) {
+        for (int i = 0; i < bits.length; i++) {
+            if (i == bits.length - 1) {
+                return true;
+            } else if (bits[i] == 1) {
+                i++;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 第一版
+     * @param bits
+     * @return
+     */
+    public boolean isOneBitCharacter0(int[] bits) {
+        for (int i = 0; i < bits.length; i++) {
+            if (bits[i] == 0 && i == bits.length - 1) {
+                return true;
+            } else if (bits[i] == 1) {
+                if (bits[i + 1] == 0) {
+                    i++;
+                    if (i == bits.length - 1) return false;
+                } else if (bits[i + 1] == 1) {
+                    i++;
+                }
+            }
+        }
         return false;
     }
 }
