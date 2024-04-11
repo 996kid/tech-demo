@@ -27,14 +27,23 @@ public class MyHashMap {
     
     public void put(int key, int value) {
         int index = hash(key);
-        Node node = new Node(key, value);
         if (arr[index] != null) {
             LinkedList<Node> linkedList = arr[index];
+            Iterator<Node> iterator = linkedList.iterator();
+            while (iterator.hasNext()) {
+                Node node1 = iterator.next();
+                if (node1.getKey() == key) {
+                    node1.setValue(value);
+                    return;
+                }
+            }
+            Node node = new Node(key, value);
             linkedList.addLast(node);
         } else {
             LinkedList<Node> linkedList = new LinkedList<>();
+            Node node = new Node(key, value);
             linkedList.addLast(node);
-            arr[key] = linkedList;
+            arr[index] = linkedList;
         }
     }
     
@@ -72,7 +81,6 @@ public class MyHashMap {
         return key % arr.length;
     }
 
-    @Getter
     class Node {
         private int key;
 
@@ -81,6 +89,18 @@ public class MyHashMap {
         public Node(int key, int value) {
             this.key = key;
 
+            this.value = value;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public void setValue(int value) {
             this.value = value;
         }
     }
